@@ -1,12 +1,8 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
-import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.HouseValidatorOrder;
 
-/**
- * Dedicated to parse String to house {@link DeliveryInf#getHouse()} value
- */
 public class HouseParserOrder extends ParamsParser<String> {
     private static HouseParserOrder INSTANCE = new HouseParserOrder();
 

@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import kz.epam.pizzeria.controller.command.Command;
-import kz.epam.pizzeria.controller.command.PermissionDeniedException;
 import kz.epam.pizzeria.controller.utils.ResponseObject;
 import kz.epam.pizzeria.controller.utils.impl.Forward;
 import kz.epam.pizzeria.controller.utils.impl.SendError;
@@ -12,10 +11,8 @@ import kz.epam.pizzeria.entity.db.impl.Order;
 import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.service.db.OrderService;
 import kz.epam.pizzeria.service.db.ProductService;
-import kz.epam.pizzeria.service.exception.IllegalPathParamException;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
-import kz.epam.pizzeria.service.pagination.PaginationCalculator;
 import kz.epam.pizzeria.service.parser.helper.PathVarCalculator;
 
 import javax.servlet.ServletException;
@@ -29,17 +26,15 @@ import java.util.stream.Collectors;
 
 public class AddProducts extends Command {
     private static final Logger LOGGER = LogManager.getLogger(AddProducts.class);
+    public static final int STATUS_CODE_500 = 500;
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private final PathVarCalculator pathVarCalculator = serviceFactory.getPathVarCalculator();
     private final ProductService productService = serviceFactory.getProductService();
-    //    private final ProductGroupService productGroupService = serviceFactory.getProductGroupService();
     private final OrderService orderService = serviceFactory.getOrderService();
-    private final PaginationCalculator paginationCalculator = serviceFactory.getPaginationCalculator();
 
     @Override
     public ResponseObject execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int part = paginationCalculator.calculatePartParam(request.getParameter("pagination"));
             Integer pathVar = pathVarCalculator.findLastInteger(request.getPathInfo());
             Order order = orderService.findEntityById(pathVar);
             Map<Product, Integer> products = order.getProducts();
@@ -68,7 +63,7 @@ public class AddProducts extends Command {
             LOGGER.debug("all = {}", all);
             return new Forward("/add-products.jsp");
         } catch (ServiceException e) {
-            return new SendError(500);
+            return new SendError(STATUS_CODE_500);
         }
     }
 }

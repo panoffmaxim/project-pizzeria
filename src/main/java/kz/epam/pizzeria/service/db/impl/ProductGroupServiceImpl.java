@@ -8,7 +8,7 @@ import kz.epam.pizzeria.dao.exception.DaoException;
 import kz.epam.pizzeria.dao.exception.NullParamDaoException;
 import kz.epam.pizzeria.dao.mysql.Transaction;
 import kz.epam.pizzeria.dao.mysql.impl.ProductGroupMysqlDao;
-import kz.epam.pizzeria.dao.mysql.impl.ProductMysqlDao;
+import kz.epam.pizzeria.dao.mysql.impl.ProductDaoImpl;
 import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.entity.db.impl.ProductGroup;
 import kz.epam.pizzeria.entity.enums.ProductType;
@@ -24,13 +24,8 @@ import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 public class ProductGroupServiceImpl implements ProductGroupService {
     private static final Logger LOGGER = LogManager.getLogger(ProductGroupServiceImpl.class);
     private final DAOFactory dAOFactory = DAOFactory.getInstance();
-    private final ProductMysqlDao productMysqlDao = dAOFactory.getProductMysqlDao();
+    private final ProductDaoImpl productDaoImpl = dAOFactory.getProductMysqlDao();
     private final ProductGroupMysqlDao productGroupMysqlDao = dAOFactory.getProductGroupMysqlDao();
-
-    /**
-     * @return List of all {@link ProductGroup} in base
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public List<ProductGroup> findAll() throws ServiceException {
@@ -45,15 +40,6 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
     }
 
-    /**
-     * @param part number of part of all entities {@link ProductGroup} from the database,
-     *             where maximum number of entities in one part is
-     *             {@value kz.epam.pizzeria.config.Configuration#MAX_PAGINATION_ELEMENTS}
-     * @return List of {@link ProductGroup} from the database related to part from input
-     * or empty list if there no so part in database
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public List<ProductGroup> findAllByPart(int part) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
@@ -67,14 +53,6 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
     }
 
-    /**
-     * @param id identifier of {@link ProductGroup}
-     * @return entity from database identified by id, or {@code null} if
-     * there no entity with so id
-     * @throws ServiceException if service can't connect to the database
-     * @see kz.epam.pizzeria.entity.db.Entity
-     */
-
     @Override
     public ProductGroup findEntityById(Integer id) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
@@ -87,12 +65,6 @@ public class ProductGroupServiceImpl implements ProductGroupService {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * @param entity {@link ProductGroup} dedicated to create
-     * @return created entity with new id, or {@code null} if entity can't be created
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public ProductGroup create(ProductGroup entity) throws ServiceException {
@@ -114,21 +86,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         List<Product> products = entity.getProducts();
         if (products != null) {
             products.stream()
-                    .map(p -> productMysqlDao.findEntityById(p.getId(), transaction))
+                    .map(p -> productDaoImpl.findEntityById(p.getId(), transaction))
                     .peek(p -> p.setProductGroup(entity))
-                    .forEach(ent -> productMysqlDao.update(ent, transaction));
+                    .forEach(ent -> productDaoImpl.update(ent, transaction));
         }
     }
-
-    /**
-     * Updates {@link ProductGroup} in the database by id. If
-     * {@link ProductGroup#getPhotoName()} is null, than would be use old value
-     *
-     * @param entity {@link ProductGroup} dedicated to update identified by id
-     *               {@link kz.epam.pizzeria.entity.db.Entity}
-     * @return true if entity successfully updated otherwise returns false
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public boolean update(ProductGroup entity) throws ServiceException {
@@ -170,7 +132,7 @@ public class ProductGroupServiceImpl implements ProductGroupService {
     private void insertAndDeleteOthers(ProductGroup entity, Transaction transaction) throws ServiceException, DaoException {
         try {
             final List<Product> products = entity.getProducts();
-            final List<Product> allByProductGroupId = productMysqlDao.findAllByProductGroupId(entity.getId(), transaction);
+            final List<Product> allByProductGroupId = productDaoImpl.findAllByProductGroupId(entity.getId(), transaction);
             List<Product> toDelete = allByProductGroupId.stream()
                     .filter(p -> {
                         for (Product product : products) {
@@ -201,25 +163,19 @@ public class ProductGroupServiceImpl implements ProductGroupService {
 
     private void deleteAll(List<Product> toDelete, Transaction transaction) {
         for (Product product : toDelete) {
-            Product entityById = productMysqlDao.findEntityById(product.getId(), transaction);
+            Product entityById = productDaoImpl.findEntityById(product.getId(), transaction);
             entityById.setProductGroup(null);
-            productMysqlDao.update(entityById, transaction);
+            productDaoImpl.update(entityById, transaction);
         }
     }
 
     private void insertAll(List<Product> toAdd, ProductGroup entity, Transaction transaction) {
         for (Product product : toAdd) {
-            Product entityById = productMysqlDao.findEntityById(product.getId(), transaction);
+            Product entityById = productDaoImpl.findEntityById(product.getId(), transaction);
             entityById.setProductGroup(entity);
-            productMysqlDao.update(entityById, transaction);
+            productDaoImpl.update(entityById, transaction);
         }
     }
-
-    /**
-     * @return List of {@link ProductGroup} from the database
-     * where method {@link ProductGroup#isDisabled()} returns false
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public List<ProductGroup> findAllByProductTypeNotDisabled(ProductType type) throws ServiceException {
@@ -239,13 +195,6 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
     }
 
-    /**
-     * @param productGroup {@link ProductGroup} without what should be return list
-     * @return List of all {@link ProductGroup} from the database
-     * except productGroup from input
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public List<ProductGroup> findAllExcept(ProductGroup productGroup) throws ServiceException {
         List<ProductGroup> all = findAll();
@@ -256,16 +205,6 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
         return all;
     }
-
-    /**
-     * Make {@link ProductGroup} disabled {@link ProductGroup#setDisabled(boolean)} true
-     * and commit to the database
-     *
-     * @param id identifier of {@link ProductGroup}
-     * @throws ServiceException                                        if service can't connect to the database
-     * @throws kz.epam.pizzeria.service.exception.NullServiceException if id is {@code null}
-     * @see kz.epam.pizzeria.entity.db.Entity
-     */
 
     @Override
     public void disableById(Integer id) throws ServiceException {
@@ -283,16 +222,6 @@ public class ProductGroupServiceImpl implements ProductGroupService {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * Make {@link ProductGroup} disabled {@link ProductGroup#setDisabled(boolean)} false
-     * and than commit to the database
-     *
-     * @param id identifier of {@link ProductGroup}
-     * @throws ServiceException                                        if service can't connect to the database
-     * @throws kz.epam.pizzeria.service.exception.NullServiceException if id is {@code null}
-     * @see kz.epam.pizzeria.entity.db.Entity
-     */
 
     @Override
     public void enableById(Integer id) throws ServiceException {
@@ -314,18 +243,13 @@ public class ProductGroupServiceImpl implements ProductGroupService {
     private void buildProductGroup(ProductGroup productGroup, Transaction transaction) throws NullServiceException {
         try {
             List<Product> products = productGroup.getProducts();
-            List<Product> allByProductGroupId = productMysqlDao.findAllByProductGroupId(productGroup.getId(), transaction);
+            List<Product> allByProductGroupId = productDaoImpl.findAllByProductGroupId(productGroup.getId(), transaction);
             products.addAll(allByProductGroupId);
             LOGGER.info("buildProductGroup: products = {}", products);
         } catch (NullParamDaoException e) {
             throw new NullServiceException();
         }
     }
-
-    /**
-     * @return count of {@link ProductGroup} in the database
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public int count() throws ServiceException {

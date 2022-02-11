@@ -12,36 +12,26 @@ import kz.epam.pizzeria.entity.db.impl.ProductGroup;
 import java.sql.*;
 import java.util.*;
 
-
-public class ProductMysqlDao extends AbstractBaseDao<Integer, Product> {
-    private static final Logger LOGGER = LogManager.getLogger(ProductMysqlDao.class);
-    // language=SQL
-    private static final String FIND_ALL_SQL = "SELECT id, price, weight, product_group_id FROM product ORDER BY id;";
-    // language=SQL
-    private static final String findAllByPart = "SELECT id, price, weight, product_group_id FROM product ORDER BY id LIMIT ? OFFSET ?;";
-
-    // language=SQL
-    private static final String FIND_BY_ID_SQL = "SELECT id, price, weight, product_group_id FROM product WHERE id = ?;";
-    // language=SQL
-    private static final String DELETE_BY_ID = "DELETE FROM product WHERE id = ?";
-    // language=SQL
-    private static final String CREATE_SQL = "INSERT INTO product (price, weight, product_group_id) VALUES (?,?,?);";
-    // language=SQL
-    private static final String UPDATE_SQL = "UPDATE product SET  price = ?, weight = ?, product_group_id = ? WHERE id = ?";
-    private static final String findProductByProductGroup = "SELECT id, price, weight, product_group_id FROM product " +
+public class ProductDaoImpl extends AbstractBaseDao<Integer, Product> {
+    private static final Logger LOGGER = LogManager.getLogger(ProductDaoImpl.class);
+    private static final String FIND_ALL_QUERY = "SELECT id, price, weight, product_group_id FROM product ORDER BY id;";
+    private static final String FIND_ALL_BY_PART_QUERY = "SELECT id, price, weight, product_group_id FROM product ORDER BY id LIMIT ? OFFSET ?;";
+    private static final String FIND_BY_ID_QUERY = "SELECT id, price, weight, product_group_id FROM product WHERE id = ?;";
+    private static final String DELETE_BY_ID_QUERY = "DELETE FROM product WHERE id = ?";
+    private static final String CREATE_QUERY = "INSERT INTO product (price, weight, product_group_id) VALUES (?,?,?);";
+    private static final String UPDATE_QUERY = "UPDATE product SET  price = ?, weight = ?, product_group_id = ? WHERE id = ?";
+    private static final String FIND_PRODUCT_BY_PRODUCT_GROUP_QUERY = "SELECT id, price, weight, product_group_id FROM product " +
             "WHERE product_group_id = ?;";
-    // language=SQL
-    private static final String findProductsByOrder = "SELECT id, price, weight, product_group_id, count " +
+    private static final String FIND_PRODUCTS_BY_ORDER_QUERY = "SELECT id, price, weight, product_group_id, count " +
             "FROM product INNER JOIN order_product ON product.id = order_product.product_id WHERE order_id = ?;";
     private static final String FIND_ALL_BY_PRODUCT_ID_NOT_DISABLED = "SELECT prod.id as id, prod.price as price, " +
             "prod.weight as weight, prod.product_group_id as product_group_id " +
             "FROM product as prod INNER JOIN product_group as prodgr ON prod.product_group_id = prodgr.id " +
             "WHERE prodgr.disabled = FALSE ORDER BY prod.id;";
-    // language=SQL
-    private static final String countSql = "SELECT count(id) FROM product;";
+    private static final String COUNT_SQL_QUERY = "SELECT count(id) FROM product;";
 
-    public ProductMysqlDao() {
-        super(FIND_ALL_SQL, FIND_BY_ID_SQL, DELETE_BY_ID, CREATE_SQL, UPDATE_SQL, findAllByPart, countSql);
+    public ProductDaoImpl() {
+        super(FIND_ALL_QUERY, FIND_BY_ID_QUERY, DELETE_BY_ID_QUERY, CREATE_QUERY, UPDATE_QUERY, FIND_ALL_BY_PART_QUERY, COUNT_SQL_QUERY);
     }
 
     protected Product findEntity(ResultSet resultSet) throws SQLException {
@@ -68,14 +58,12 @@ public class ProductMysqlDao extends AbstractBaseDao<Integer, Product> {
     protected void createParams(Product entity, PreparedStatement statement) throws SQLException {
         statement.setInt(1, entity.getPrice());
         statement.setInt(2, entity.getWeight());
-//        statement.setInt(3, entity.getProductGroup().getId());
         setProductGroup(3, entity.getProductGroup(), statement);
     }
 
     protected void updateParams(Product entity, PreparedStatement statement) throws SQLException {
         statement.setInt(1, entity.getPrice());
         statement.setInt(2, entity.getWeight());
-//        statement.setInt(3, entity.getProductGroup().getId());
         setProductGroup(3, entity.getProductGroup(), statement);
         statement.setInt(4, entity.getId());
     }
@@ -95,7 +83,7 @@ public class ProductMysqlDao extends AbstractBaseDao<Integer, Product> {
         }
         Connection cn = transaction.getConnection();
         List<Product> productGroups = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement(findProductByProductGroup)) {
+        try (PreparedStatement statement = cn.prepareStatement(FIND_PRODUCT_BY_PRODUCT_GROUP_QUERY)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -116,7 +104,7 @@ public class ProductMysqlDao extends AbstractBaseDao<Integer, Product> {
     public Map<Product, Integer> findAllByOrderId(Integer id, Transaction transaction) {
         Connection cn = transaction.getConnection();
         Map<Product, Integer> result = new HashMap<>();
-        try (PreparedStatement statement = cn.prepareStatement(findProductsByOrder)) {
+        try (PreparedStatement statement = cn.prepareStatement(FIND_PRODUCTS_BY_ORDER_QUERY)) {
             idParam(statement, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

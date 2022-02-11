@@ -4,15 +4,13 @@ import kz.epam.pizzeria.dao.exception.DaoException;
 import kz.epam.pizzeria.dao.mysql.Transaction;
 import kz.epam.pizzeria.dao.mysql.impl.*;
 
-import java.sql.SQLException;
-
 public final class DAOFactory {
     private static final DAOFactory instance = new DAOFactory();
-    private final DeliveryInfMysqlDao deliveryInfMysqlDao = new DeliveryInfMysqlDao();
-    private final OrderMysqlDao orderMysqlDao = new OrderMysqlDao();
-    private final ProductMysqlDao productMysqlDao = new ProductMysqlDao();
+    private final DeliveryInfDaoImpl deliveryInfDaoImpl = new DeliveryInfDaoImpl();
+    private final OrderDaoImpl orderDaoImpl = new OrderDaoImpl();
+    private final ProductDaoImpl productDaoImpl = new ProductDaoImpl();
     private final ProductGroupMysqlDao productGroupMysqlDao = new ProductGroupMysqlDao();
-    private final UserMysqlDao userMysqlDao = new UserMysqlDao();
+    private final UserDaoImpl userDaoImpl = new UserDaoImpl();
     private final ImageWriterDao imageWriterDao = new ImageWriterDao();
 
     private DAOFactory() {
@@ -22,24 +20,24 @@ public final class DAOFactory {
         return instance;
     }
 
-    public DeliveryInfMysqlDao getDeliveryInfMysqlDao() {
-        return deliveryInfMysqlDao;
+    public DeliveryInfDaoImpl getDeliveryInfMysqlDao() {
+        return deliveryInfDaoImpl;
     }
 
-    public OrderMysqlDao getOrderMysqlDao() {
-        return orderMysqlDao;
+    public OrderDaoImpl getOrderMysqlDao() {
+        return orderDaoImpl;
     }
 
-    public ProductMysqlDao getProductMysqlDao() {
-        return productMysqlDao;
+    public ProductDaoImpl getProductMysqlDao() {
+        return productDaoImpl;
     }
 
     public ProductGroupMysqlDao getProductGroupMysqlDao() {
         return productGroupMysqlDao;
     }
 
-    public UserMysqlDao getUserMysqlDao() {
-        return userMysqlDao;
+    public UserDaoImpl getUserMysqlDao() {
+        return userDaoImpl;
     }
 
     public ImageWriterDao getImageWriterDao() {

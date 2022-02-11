@@ -12,12 +12,10 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/admin/create_product_group/main.css' />">
 
-
 </head>
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="../fragments/navPanel.jsp"/>
 <header>
@@ -127,7 +125,6 @@
 </main>
 
 <c:import url="../fragments/footer.jsp"/>
-
 
 <tag:impfoot/>
 

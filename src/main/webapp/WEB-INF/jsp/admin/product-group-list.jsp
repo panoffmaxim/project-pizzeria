@@ -14,7 +14,6 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/admin/product_group_list/main.css' />">
 
-
 </head>
 <body>
 

@@ -66,7 +66,6 @@ public class User extends Entity<Integer> implements Serializable {
         return new Builder();
     }
 
-
     public String getUsername() {
         return username;
     }

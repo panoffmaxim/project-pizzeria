@@ -4,9 +4,6 @@ import kz.epam.pizzeria.entity.enums.Role;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.RoleValidator;
 
-/**
- * Dedicated to parse String to {@link Role} value
- */
 public class RoleParser extends ParamsParser<Role> {
     private static RoleParser INSTANCE = new RoleParser();
 

@@ -1,12 +1,8 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
-import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.StreetValidatorOrder;
 
-/**
- * Dedicated to parse String to {@link DeliveryInf#getStreet()} value
- */
 public class StreetParserOrder extends ParamsParser<String> {
     private static StreetParserOrder INSTANCE = new StreetParserOrder();
 

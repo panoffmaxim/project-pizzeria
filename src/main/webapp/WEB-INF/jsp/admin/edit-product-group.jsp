@@ -1,7 +1,6 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <jsp:useBean id="group" scope="request" type="kz.epam.pizzeria.entity.db.impl.ProductGroup"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="products" scope="request" type="java.util.List<kz.epam.pizzeria.entity.db.impl.Product>"/>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
@@ -14,7 +13,6 @@
     <title>Edit product group</title>
 
     <link rel="stylesheet" href="<c:url value='/static/css/admin/create_product_group/main.css' />">
-
 
 </head>
 <body>

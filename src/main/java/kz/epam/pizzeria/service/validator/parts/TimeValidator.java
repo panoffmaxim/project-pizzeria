@@ -1,16 +1,14 @@
 package kz.epam.pizzeria.service.validator.parts;
 
-import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import kz.epam.pizzeria.service.validator.Validator;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-/**
- * Dedicated to validate LocalDateTime for {@link DeliveryInf#getDeliveryTime()} value
- */
 public class TimeValidator implements Validator<LocalDateTime> {
     private static TimeValidator INSTANCE = new TimeValidator();
+    public static final Duration MIN_DIFFERENCE = Duration.ofMinutes(30);
+    private static final Duration MAX_DIFFERENCE = Duration.ofHours(24);
 
     public static TimeValidator getInstance() {
         return INSTANCE;
@@ -18,9 +16,6 @@ public class TimeValidator implements Validator<LocalDateTime> {
 
     private TimeValidator() {
     }
-
-    public static final Duration MIN_DIFFERENCE = Duration.ofMinutes(30);
-    private static final Duration MAX_DIFFERENCE = Duration.ofHours(24);
 
     @Override
     public boolean isValid(LocalDateTime input) {

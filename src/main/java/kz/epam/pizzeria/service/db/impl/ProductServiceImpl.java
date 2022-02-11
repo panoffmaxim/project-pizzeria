@@ -4,7 +4,7 @@ import kz.epam.pizzeria.dao.DAOFactory;
 import kz.epam.pizzeria.dao.exception.DaoException;
 import kz.epam.pizzeria.dao.mysql.Transaction;
 import kz.epam.pizzeria.dao.mysql.impl.ProductGroupMysqlDao;
-import kz.epam.pizzeria.dao.mysql.impl.ProductMysqlDao;
+import kz.epam.pizzeria.dao.mysql.impl.ProductDaoImpl;
 import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.entity.db.impl.ProductGroup;
 import kz.epam.pizzeria.service.db.ProductService;
@@ -17,18 +17,13 @@ import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 
 public class ProductServiceImpl implements ProductService {
     private final DAOFactory dAOFactory = DAOFactory.getInstance();
-    private final ProductMysqlDao productMysqlDao = dAOFactory.getProductMysqlDao();
+    private final ProductDaoImpl productDaoImpl = dAOFactory.getProductMysqlDao();
     private final ProductGroupMysqlDao productGroupMysqlDao = dAOFactory.getProductGroupMysqlDao();
-
-    /**
-     * @return List of all {@link Product} in base
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public List<Product> findAll() throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
-            List<Product> all = productMysqlDao.findAll(transaction);
+            List<Product> all = productDaoImpl.findAll(transaction);
             all.forEach(p -> buildProduct(p, transaction));
             return all;
         } catch (DaoException e) {
@@ -36,19 +31,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @param part number of part of all entities {@link Product} from the database,
-     *             where maximum number of entities in one part is
-     *             {@value kz.epam.pizzeria.config.Configuration#MAX_PAGINATION_ELEMENTS}
-     * @return List of {@link Product} from the database related to part from input
-     * or empty list if there no so part in database
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public List<Product> findAllByPart(int part) throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
-            List<Product> all = productMysqlDao.findAllByPart(transaction,
+            List<Product> all = productDaoImpl.findAllByPart(transaction,
                     (part - 1) * MAX_PAGINATION_ELEMENTS,
                     MAX_PAGINATION_ELEMENTS);
             all.forEach(p -> buildProduct(p, transaction));
@@ -66,18 +52,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @param id identifier of {@link Product}
-     * @return entity from database identified by id, or {@code null} if
-     * there no entity with so id
-     * @throws ServiceException if service can't connect to the database
-     * @see kz.epam.pizzeria.entity.db.Entity
-     */
-
     @Override
     public Product findEntityById(Integer id) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            Product entityById = productMysqlDao.findEntityById(id, transaction);
+            Product entityById = productDaoImpl.findEntityById(id, transaction);
             buildProduct(entityById, transaction);
             return entityById;
         } catch (DaoException e) {
@@ -85,17 +63,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @param id identifier of {@link Product}
-     * @return true if entity successfully deleted,
-     * otherwise return false
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public boolean deleteById(Integer integer) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            boolean result = productMysqlDao.deleteById(integer, transaction);
+            boolean result = productDaoImpl.deleteById(integer, transaction);
             if (result) {
                 transaction.commit();
             } else {
@@ -106,18 +77,11 @@ public class ProductServiceImpl implements ProductService {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * @param entity what dedicated to delete {@link Product}
-     * @return true if entity successfully deleted,
-     * otherwise return false
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public boolean delete(Product entity) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            boolean result = productMysqlDao.delete(entity, transaction);
+            boolean result = productDaoImpl.delete(entity, transaction);
             if (result) {
                 transaction.commit();
             } else {
@@ -129,16 +93,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @param entity {@link Product} dedicated to create
-     * @return created entity with new id, or {@code null} if entity can't be created
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public Product create(Product entity) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            Product product = productMysqlDao.create(entity, transaction);
+            Product product = productDaoImpl.create(entity, transaction);
             if (product != null) {
                 transaction.commit();
             } else {
@@ -150,17 +108,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @param entity {@link Product} dedicated to update identified by id
-     *               {@link kz.epam.pizzeria.entity.db.Entity}
-     * @return true if entity successfully updated otherwise returns false
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public boolean update(Product entity) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            boolean result = productMysqlDao.update(entity, transaction);
+            boolean result = productDaoImpl.update(entity, transaction);
             if (result) {
                 transaction.commit();
             } else {
@@ -172,12 +123,6 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @return List of {@link Product} from the database
-     * where method {@link Product#getProductGroup()} returns null
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public List<Product> findAllByProductGroupNull() throws ServiceException {
         return findAll().stream()
@@ -185,17 +130,10 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * @return List of {@link Product} from the database
-     * where field {@link Product#getProductGroup()} by the method
-     * {@link ProductGroup#isDisabled()} returns false
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public List<Product> findAllByProductGroupNotDisabled() throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
-            List<Product> all = productMysqlDao.findAllByProductGroupNotDisabled(transaction);
+            List<Product> all = productDaoImpl.findAllByProductGroupNotDisabled(transaction);
             all.forEach(p -> buildProduct(p, transaction));
             return all;
         } catch (DaoException e) {
@@ -203,14 +141,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    /**
-     * @return count of {@link Product} in the database
-     * @throws ServiceException if service can't connect to the database
-     */
     @Override
     public int count() throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
-            return productMysqlDao.count(transaction);
+            return productDaoImpl.count(transaction);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

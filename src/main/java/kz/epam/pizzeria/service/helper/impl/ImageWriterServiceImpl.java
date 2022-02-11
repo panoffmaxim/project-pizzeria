@@ -9,6 +9,8 @@ import java.io.File;
 
 public class ImageWriterServiceImpl implements ImageWriterService {
     private static ImageWriterServiceImpl INSTANCE = new ImageWriterServiceImpl();
+    private final DAOFactory dAOFactory = DAOFactory.getInstance();
+    private final ImageWriterDao imageWriterDao = dAOFactory.getImageWriterDao();
 
     public static ImageWriterServiceImpl getInstance() {
         return INSTANCE;
@@ -16,26 +18,12 @@ public class ImageWriterServiceImpl implements ImageWriterService {
 
     private ImageWriterServiceImpl() {
     }
-    private final DAOFactory dAOFactory = DAOFactory.getInstance();
 
-    final ImageWriterDao imageWriterDao = dAOFactory.getImageWriterDao();
-
-    /**
-     * @param part FileItem from multipart form data
-     * @return created file
-     * @throws Exception if service can't create the file
-     */
 
     @Override
     public File downloadFile(FileItem part) throws Exception {
         return imageWriterDao.downloadFile(part);
     }
-
-    /**
-     * Deletes file by path if the file exists
-     *
-     * @param photoName path to file to delete
-     */
 
     @Override
     public void deleteImageIfNeed(String photoName) {

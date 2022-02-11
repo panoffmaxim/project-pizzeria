@@ -8,11 +8,9 @@
 <head>
     <title>Login</title>
 
-
     <tag:imphead footer="${true}" navbar="${true}" btns="${true}" />
 
     <link rel="stylesheet" href="<c:url value='/static/css/login/main.css' />">
-
 
 </head>
 <body>
@@ -22,13 +20,11 @@
 
 <c:import url="fragments/navPanel.jsp"/>
 
-
 <header class="container">
     <h1>
         <fmt:message key="web.links.login" bundle="${ rb }"/>
     </h1>
 </header>
-
 
 <main class="container">
     <c:if test="${not empty redirect_authentication_error}">
@@ -59,9 +55,6 @@
                    name="target_url"
                    value="<c:out value="${redirect_target_url}"/>"/>
         </c:if>
-        <%--        <input type="hidden"--%>
-        <%--               name="${_csrf.parameterName}"--%>
-        <%--               value="${_csrf.token}"/>--%>
 
         <div class="submit">
             <button class="btn white__bg__orange" type="submit">
@@ -83,7 +76,6 @@
         </div>
     </div>
 </main>
-
 
 <c:import url="fragments/footer.jsp"/>
 

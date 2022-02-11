@@ -6,30 +6,22 @@ import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class DeliveryInfMysqlDao extends AbstractBaseDao<Integer, DeliveryInf> {
-    //переименвать переменные и перенести на следуюзие строки чтоб залезало на жэкран
-    // language=SQL
-    private static final String findAllSql = "SELECT id, comments, delivery_time, email, floor, house, phone, porch, room, " +
+public class DeliveryInfDaoImpl extends AbstractBaseDao<Integer, DeliveryInf> {
+    private static final String FIND_ALL_QUERY = "SELECT id, comments, delivery_time, email, floor, house, phone, porch, room, " +
             "street FROM delivery_inf ORDER BY id;";
-    // language=SQL
-    private static final String findEntityByIdSql = "SELECT id, comments, delivery_time, email, floor, house, phone, porch, " +
+    private static final String FIND_ENTITY_BY_ID_QUERY = "SELECT id, comments, delivery_time, email, floor, house, phone, porch, " +
             "room, street FROM delivery_inf WHERE id = ?;";
-    // language=SQL
-    private static final String deleteByIdSql = "DELETE FROM delivery_inf WHERE id = ?;";
-    // language=SQL
-    private static final String createSql = "INSERT INTO delivery_inf (comments, delivery_time, email, floor, house, phone, " +
+    private static final String DELETE_BY_ID_QUERY = "DELETE FROM delivery_inf WHERE id = ?;";
+    private static final String CREATE_QUERY = "INSERT INTO delivery_inf (comments, delivery_time, email, floor, house, phone, " +
             "porch, room, street) VALUES (?,?,?,?,?,?,?,?,?);";
-    // language=SQL
-    private static final String updateSql = "UPDATE delivery_inf SET  comments = ?, delivery_time = ?, email = ?, floor = ?, " +
+    private static final String UPDATE_QUERY = "UPDATE delivery_inf SET  comments = ?, delivery_time = ?, email = ?, floor = ?, " +
             "house = ?, phone = ?, porch = ?, room = ?, street = ? WHERE id = ?;";
-    // language=SQL
-    private static final String findAllByPart = "SELECT id, comments, delivery_time, email, floor, house, phone, porch, room, " +
+    private static final String FIND_ALL_BY_PART_QUERY = "SELECT id, comments, delivery_time, email, floor, house, phone, porch, room, " +
             "street FROM delivery_inf ORDER BY id LIMIT ? OFFSET ?;";
-    // language=SQL
-    private static final String countSql = "SELECT count(id) FROM delivery_inf;";
+    private static final String COUNT_QUERY = "SELECT count(id) FROM delivery_inf;";
 
-    public DeliveryInfMysqlDao() {
-        super(findAllSql, findEntityByIdSql, deleteByIdSql, createSql, updateSql, findAllByPart, countSql);
+    public DeliveryInfDaoImpl() {
+        super(FIND_ALL_QUERY, FIND_ENTITY_BY_ID_QUERY, DELETE_BY_ID_QUERY, CREATE_QUERY, UPDATE_QUERY, FIND_ALL_BY_PART_QUERY, COUNT_QUERY);
     }
 
     @Override
@@ -80,7 +72,6 @@ public class DeliveryInfMysqlDao extends AbstractBaseDao<Integer, DeliveryInf> {
         statement.setString(8, entity.getRoom());
         statement.setString(9, entity.getStreet());
     }
-
 
     private void setIntOrNull(PreparedStatement statement, Integer integer, int label) throws SQLException {
         if (integer == null) {

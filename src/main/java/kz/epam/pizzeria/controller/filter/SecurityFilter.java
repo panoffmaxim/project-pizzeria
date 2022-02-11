@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import kz.epam.pizzeria.entity.db.impl.User;
-import kz.epam.pizzeria.entity.enums.Role;
 import kz.epam.pizzeria.service.db.UserService;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
@@ -21,6 +20,7 @@ public class SecurityFilter implements Filter {
     private final UserService userService = serviceFactory.getUserService();
 
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+        LOGGER.debug("begin filter");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -38,7 +38,7 @@ public class SecurityFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

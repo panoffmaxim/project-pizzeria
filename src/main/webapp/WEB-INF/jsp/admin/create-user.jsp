@@ -10,9 +10,7 @@
 
     <tag:imphead footer="${true}" navbar="${true}" btns="${true}" err="${true}"/>
 
-
     <link rel="stylesheet" href="<c:url value='/static/css/admin/create_user.css' />">
-
 
 </head>
 <body>

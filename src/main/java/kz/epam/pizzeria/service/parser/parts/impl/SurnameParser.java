@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.SurnameValidator;
 
-/**
- * Dedicated to parse String to surname value
- */
 public class SurnameParser extends ParamsParser<String> {
     private static SurnameParser INSTANCE = new SurnameParser();
 

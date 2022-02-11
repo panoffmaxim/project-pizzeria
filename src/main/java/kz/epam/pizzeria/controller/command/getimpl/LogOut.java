@@ -1,7 +1,6 @@
 package kz.epam.pizzeria.controller.command.getimpl;
 
 import kz.epam.pizzeria.controller.command.Command;
-import kz.epam.pizzeria.controller.command.PermissionDeniedException;
 import kz.epam.pizzeria.controller.utils.ResponseObject;
 import kz.epam.pizzeria.controller.utils.impl.Redirect;
 

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
-import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 
 //@WebListener

@@ -35,31 +35,6 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
     private final IdParser idParser = IdParser.getInstance();
     private final BooleanParser booleanParser = BooleanParser.getInstance();
 
-    /**
-     * @param redirect      Map to return what parameter is valid, and value with
-     *                      what parameter was in input
-     *                      First String in the map is the name of parameter
-     *                      Second String in the map is value of input in parameter
-     *                      or information about existing error in the map
-     *                      For example {street, abcde} means that input for
-     *                      parameter of name "street" was "abcde"
-     *                      {street_error, true} means that in parameter
-     *                      of name "street" was error.
-     * @param usernameParam {@link User#getUsername()}
-     * @param passwordParam {@link User#getPassword()}
-     * @param roleParam     {@link User#getRole()}
-     * @param nameParam     {@link User#getName()}
-     * @param surnameParam  {@link User#getSurname()}
-     * @param houseParam    {@link User#getHouse()}
-     * @param roomParam     {@link User#getRoom()}
-     * @param porchParam    {@link User#getPorch()}
-     * @param floorParam    {@link User#getFloor()}
-     * @param phoneParam    {@link User#getPhone()}
-     * @param emailParam    {@link User#getEmail()}
-     * @param streetParam   {@link User#getStreet()}
-     * @return entity {@link User} with parsed parameter, or {@code null} if any parameter
-     * is invalid
-     */
     @Override
     public User parseUser(Map<String, String> redirect, String usernameParam, String passwordParam, String roleParam, String nameParam, String surnameParam, String houseParam, String roomParam, String porchParam, String floorParam, String phoneParam, String emailParam, String streetParam) {
         OptionalNullable<String> username = usernameParser.parse(usernameParam);
@@ -89,7 +64,6 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
         if (result) {
             return User.newBuilder()
                     .username(username.get())
-//                    .password(password.get())
                     .password(applicationEncrypt.calcUserPasswordHash(password.get()))
                     .role(role.get())
                     .name(name.get())
@@ -109,31 +83,6 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
         }
     }
 
-    /**
-     * @param redirect      Map to return what parameter is valid, and value with
-     *                      what parameter was in input
-     *                      First String in the map is the name of parameter
-     *                      Second String in the map is value of input in parameter
-     *                      or information about existing error in the map
-     *                      For example {street, abcde} means that input for
-     *                      parameter of name "street" was "abcde"
-     *                      {street_error, true} means that in parameter
-     *                      of name "street" was error.
-     * @param usernameParam {@link User#getUsername()}
-     * @param roleParam     {@link User#getRole()}
-     * @param nameParam     {@link User#getName()}
-     * @param surnameParam  {@link User#getSurname()}
-     * @param houseParam    {@link User#getHouse()}
-     * @param roomParam     {@link User#getRoom()}
-     * @param porchParam    {@link User#getPorch()}
-     * @param floorParam    {@link User#getFloor()}
-     * @param phoneParam    {@link User#getPhone()}
-     * @param emailParam    {@link User#getEmail()}
-     * @param streetParam   {@link User#getStreet()}
-     * @param isBlocked     {@link User#isBlocked()}
-     * @return entity {@link User} with parsed parameter, or {@code null} if any parameter
-     * is invalid
-     */
     @Override
     public boolean parseUserWithId(Map<String, String> redirect, User base, String usernameParam, String roleParam, String nameParam,
                                    String surnameParam, String houseParam, String roomParam, String porchParam, String floorParam,
@@ -181,30 +130,6 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
         }
     }
 
-    /**
-     * @param redirect      Map to return what parameter is valid, and value with
-     *                      what parameter was in input
-     *                      First String in the map is the name of parameter
-     *                      Second String in the map is value of input in parameter
-     *                      or information about existing error in the map
-     *                      For example {street, abcde} means that input for
-     *                      parameter of name "street" was "abcde"
-     *                      {street_error, true} means that in parameter
-     *                      of name "street" was error.
-     * @param emailParam    {@link User#getEmail()}
-     * @param phoneParam    {@link User#getPhone()}
-     * @param usernameParam {@link User#getUsername()}
-     * @param passwordParam {@link User#getPassword()}
-     * @param nameParam     {@link User#getName()}
-     * @param surnameParam  {@link User#getSurname()}
-     * @param streetParam   {@link User#getStreet()}
-     * @param houseParam    {@link User#getHouse()}
-     * @param roomParam     {@link User#getRoom()}
-     * @param porchParam    {@link User#getPorch()}
-     * @param floorParam    {@link User#getFloor()}
-     * @return entity {@link User} with parsed parameter, or {@code null} if any parameter
-     * is invalid
-     */
     @Override
     public User parseRegistrationUser(Map<String, String> redirect, String emailParam, String phoneParam, String usernameParam,
                                       String passwordParam, String nameParam, String surnameParam, String streetParam, String houseParam,
@@ -311,7 +236,6 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
     public boolean parseChangePassword(Map<String, String> redirect, User base, String passwordOld, String passwordNew) {
         String password = base.getPassword();
         if (password.equals(applicationEncrypt.calcUserPasswordHash(passwordOld))) {
-//        if (password.equals(passwordOld)) {
             OptionalNullable<String> parse = passwordParser.parse(passwordNew);
             if (parse.isPresent()) {
                 base.setPassword(applicationEncrypt.calcUserPasswordHash(parse.get()));
@@ -323,5 +247,9 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
             redirect.put("old_password_error", "true");
         }
         return false;
+    }
+
+    public IdParser getIdParser() {
+        return idParser;
     }
 }

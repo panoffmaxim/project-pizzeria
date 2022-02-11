@@ -6,12 +6,6 @@ import org.apache.logging.log4j.Logger;
 import kz.epam.pizzeria.entity.struct.OptionalNullable;
 import kz.epam.pizzeria.service.validator.Validator;
 
-/**
- * Dedicated to parse String parameter to any declared type, validate it and return
- * Optional value if parameter is valid
- *
- * @param <T> type of output parameter after parsing
- */
 public abstract class ParamsParser<T> {
     private static final Logger LOGGER = LogManager.getLogger(ParamsParser.class);
     private Validator<T> validator;
@@ -19,18 +13,8 @@ public abstract class ParamsParser<T> {
         this.validator = validator;
     }
 
-    /**
-     * @param input String input to parse to T type
-     * @return instance of parsed parameter
-     * @throws Exception if parsing is failed
-     */
     protected abstract T modify(String input) throws Exception;
 
-    /**
-     * @param input String input to parse to T type
-     * @return not empty OptionalNullable value if parsing and
-     * validation was successful, otherwise return empty OptionalNullable
-     */
     public OptionalNullable<T> parse(String input) {
         LOGGER.debug("validator = {}", validator);
         try {

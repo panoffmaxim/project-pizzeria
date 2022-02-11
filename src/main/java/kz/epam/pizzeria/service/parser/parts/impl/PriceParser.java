@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.PriceValidator;
 
-/**
- * Dedicated to parse String to price value
- */
 public class PriceParser extends ParamsParser<Integer> {
     private static PriceParser INSTANCE = new PriceParser();
 

@@ -15,63 +15,33 @@ import kz.epam.pizzeria.entity.db.impl.User;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-
-public class OrderMysqlDao extends AbstractBaseDao<Integer, Order> {
-    private static final Logger LOGGER = LogManager.getLogger(OrderMysqlDao.class);
+public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
+    private static final Logger LOGGER = LogManager.getLogger(OrderDaoImpl.class);
     private static final String FIND_CURRENT = "SELECT id, client_name, creation, payment_type, price, status, " +
             "delivery_inf_id, user_id FROM `order` WHERE `status` = ? AND  user_id = ?;";
     private final DaoHelper daoHelper = DaoHelper.getInstance();
-    /*language=SQL*/
-    private static final String FIND_ALL_SQL = "SELECT id, client_name, creation, payment_type, price, status, " +
+    private static final String FIND_ALL_QUERY = "SELECT id, client_name, creation, payment_type, price, status, " +
             "delivery_inf_id, user_id FROM `order` ORDER BY id;";
-    /*language=SQL*/
-    private static final String findAllByPart = "SELECT id, client_name, creation, payment_type, price, status, " +
+    private static final String FIND_ALL_BY_PART_QUERY = "SELECT id, client_name, creation, payment_type, price, status, " +
             "delivery_inf_id, user_id FROM `order` ORDER BY id LIMIT ? OFFSET ?;";
-    /*language=SQL*/
     private static final String FIND_BY_ID_SQL = "SELECT id, client_name, creation, payment_type, price, status, " +
             "delivery_inf_id, user_id FROM `order` WHERE id = ?;";
-    /*language=SQL*/
     private static final String DELETE_BY_ID = "DELETE FROM `order` WHERE id = ?";
-    /*language=SQL*/
     private static final String CREATE_SQL = "INSERT INTO `order` (client_name, creation, payment_type, price, status, " +
             "delivery_inf_id, user_id) VALUES (?,?,?,?,?,?,?);";
-    /*language=SQL*/
     private static final String UPDATE_SQL = "UPDATE `order` SET  client_name = ?, creation = ?, payment_type = ?, " +
             "price = ?, status = ?, delivery_inf_id = ?, user_id = ? WHERE id = ?;";
-    // language=SQL
-    private static final String countSql = "SELECT count(id) FROM `order`;";
-    /*language=SQL*/
-    private static final String FIND_PRODUCTS_BY_ORDER_SQL = "SELECT product_id from `order` INNER JOIN order_product " +
-            "ON `order`.id = order_product.order_id WHERE order_id = ?;";
-    private static final String insertProducts = "INSERT INTO order_product(order_id, product_id, count) VALUES (?,?,?);";
+    private static final String COUNT_QUERY = "SELECT count(id) FROM `order`;";
+    private static final String INSERT_PRODUCTS_QUERY = "INSERT INTO order_product(order_id, product_id, count) VALUES (?,?,?);";
     private static final String ADD_FIRST_PRODUCT = "INSERT INTO order_product(order_id, product_id, count) VALUES (?,?,1);";
     private static final String INCREASE_COUNT_PROD = "UPDATE order_product SET count = count+1 WHERE product_id = ? and  order_id = ?;";
     private static final String REMOVE_PRODUCT = "DELETE FROM order_product WHERE order_id=? AND product_id = ?;";
     private static final String MINUS_PRODUCT = "UPDATE order_product SET count = count -1 WHERE product_id=? and order_id = ?;";
 
-    public OrderMysqlDao() {
-        super(FIND_ALL_SQL, FIND_BY_ID_SQL, DELETE_BY_ID, CREATE_SQL, UPDATE_SQL, findAllByPart, countSql);
-    }
-
-    public List<Integer> findAllProductsIdsByOrderId(Integer id, Transaction transaction) {
-        Connection cn = transaction.getConnection();
-        List<Integer> ids = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement(FIND_PRODUCTS_BY_ORDER_SQL)) {
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int product_id = resultSet.getInt("product_id");
-                ids.add(product_id);
-            }
-        } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
-        }
-        return ids;
+    public OrderDaoImpl() {
+        super(FIND_ALL_QUERY, FIND_BY_ID_SQL, DELETE_BY_ID, CREATE_SQL, UPDATE_SQL, FIND_ALL_BY_PART_QUERY, COUNT_QUERY);
     }
 
     @Override
@@ -89,14 +59,7 @@ public class OrderMysqlDao extends AbstractBaseDao<Integer, Order> {
                 .status(OrderStatus.values()[resultSet.getInt("status")])
                 .deliveryInf(delInfId != 0 ? DeliveryInf.newBuilder().id(delInfId).build() : null)
                 .user(userId != 0 ? User.newBuilder().id(userId).build() : null)
-//                .products(mapToEmptyProducts(findAllProductsIdsByOrderId(id)))
                 .build();
-    }
-
-    private List<Product> mapToEmptyProducts(List<Integer> ids) {
-        return ids.stream()
-                .map(i -> Product.newBuilder().id(i).build())
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -108,8 +71,6 @@ public class OrderMysqlDao extends AbstractBaseDao<Integer, Order> {
         statement.setString(1, entity.getClientName());
         statement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
         daoHelper.setOrdinalOrNull(entity.getPaymentType(), statement, 3);
-//        statement.setInt(3, );
-//        statement.setInt(4, entity.getPrice());
         daoHelper.setIntOrNull(statement, entity.getPrice(), 4);
         daoHelper.setOrdinalOrNull(entity.getStatus(), statement, 5);
         if (entity.getDeliveryInf() != null) {
@@ -142,7 +103,6 @@ public class OrderMysqlDao extends AbstractBaseDao<Integer, Order> {
             statement.setNull(7, Types.INTEGER);
         }
         statement.setInt(8, entity.getId());
-//        statement.setInt(7, entity.getId());
     }
 
     @Override
@@ -153,7 +113,7 @@ public class OrderMysqlDao extends AbstractBaseDao<Integer, Order> {
     public boolean addProductsOnCreate(Map<Product, Integer> products, Order order, Transaction transaction) {
         Connection cn = transaction.getConnection();
         for (Map.Entry<Product, Integer> productIntegerEntry : products.entrySet()) {
-            try (PreparedStatement statement = cn.prepareStatement(insertProducts)) {
+            try (PreparedStatement statement = cn.prepareStatement(INSERT_PRODUCTS_QUERY)) {
                 insertProdsParams(productIntegerEntry, order, statement);
                 int affectedRows = statement.executeUpdate();
                 if (affectedRows != 1) {

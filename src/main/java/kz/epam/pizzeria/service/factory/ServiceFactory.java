@@ -29,9 +29,6 @@ import kz.epam.pizzeria.service.parser.helper.impl.PathVarCalculatorImpl;
 import kz.epam.pizzeria.service.parser.parts.impl.IdParser;
 import kz.epam.pizzeria.service.validator.parts.LoginValidator;
 
-/**
- * Factory to give services for other layers
- */
 public class ServiceFactory {
     private static ServiceFactory instance = new ServiceFactory();
 

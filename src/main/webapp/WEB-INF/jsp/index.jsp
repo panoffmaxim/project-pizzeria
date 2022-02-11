@@ -1,15 +1,10 @@
-<%@ page import="java.util.List" %>
-<%--<%@ page import="kz.epam.pizzeria.entity.Product" %>--%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="ctg" uri="custom-tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
-
 
 <!DOCTYPE html>
 <html lang="en">

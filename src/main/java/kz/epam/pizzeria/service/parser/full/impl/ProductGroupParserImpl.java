@@ -29,26 +29,6 @@ public class ProductGroupParserImpl implements kz.epam.pizzeria.service.parser.f
     private final PhotoNameParser photoNameParser = PhotoNameParser.getInstance();
     private final BooleanParser booleanParser = BooleanParser.getInstance();
 
-    /**
-     * Take part and choose what operation should be done with it and
-     * is input valid. If valid, service should put the value in entity, otherwise
-     * return false.
-     * If service save the file, it put the value in fileNameOpt to track it
-     *
-     * @param productGroup entity in what should be put a value from part
-     * @param part         FileItem from multipart form data
-     * @param redirect     Map to return what parameter is valid, and value with
-     *                     what parameter was in input
-     *                     First String in the map is the name of parameter
-     *                     Second String in the map is value of input in parameter
-     *                     or information about existing error in the map
-     *                     For example {street, abcde} means that input for
-     *                     parameter of name "street" was "abcde"
-     *                     {street_error, true} means that in parameter
-     *                     of name "street" was error.
-     * @param fileNameOpt  if file will be downloaded the value should be put there
-     * @return true if parameter successfully parsed, and otherwise returns false
-     */
     @Override
     public boolean fillFieldsOnCreate(ProductGroup productGroup, FileItem part, Map<String, String> redirect, ValueHolder<String> fileNameOpt) {
         File file = null;
@@ -134,26 +114,6 @@ public class ProductGroupParserImpl implements kz.epam.pizzeria.service.parser.f
         }
     }
 
-    /**
-     * Take part and choose what operation should be done with it and
-     * is input valid. If valid, service should put the value in entity, otherwise
-     * return false.
-     * If service save the file, it put the value in fileNameOpt to track it
-     *
-     * @param productGroup entity in what should be put a value from part
-     * @param part         FileItem from multipart form data
-     * @param redirect     Map to return what parameter is valid, and value with
-     *                     what parameter was in input
-     *                     First String in the map is the name of parameter
-     *                     Second String in the map is value of input in parameter
-     *                     or information about existing error in the map
-     *                     For example {street, abcde} means that input for
-     *                     parameter of name "street" was "abcde"
-     *                     {street_error, true} means that in parameter
-     *                     of name "street" was error.
-     * @param fileNameOpt  if file will be downloaded the value should be put there
-     * @return true if parameter successfully parsed, and otherwise returns false
-     */
     @Override
     public boolean fillFieldsOnUpdate(ProductGroup productGroup, FileItem part, Map<String, String> redirect, ValueHolder<String> fileNameOpt) {
         File file = null;

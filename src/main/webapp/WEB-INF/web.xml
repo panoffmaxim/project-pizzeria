@@ -8,7 +8,6 @@
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>kz.epam.pizzeria.controller.MainServlet</servlet-class>
         <multipart-config>
-            <!--            <location>/tmp</location>-->
             <max-file-size>20848820</max-file-size>
             <max-request-size>418018841</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>
@@ -84,10 +83,6 @@
         <listener-class>kz.epam.pizzeria.controller.listener.ApplicationListener</listener-class>
     </listener>
 
-    <!--    <error-page>-->
-    <!--        <exception-type>kz.epam.pizzeria.controller.command.PermissionDeniedException</exception-type>-->
-    <!--        <location>/page/permission-denied</location>-->
-    <!--    </error-page>-->
     <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/jsp/errors/forbidden.jsp</location>

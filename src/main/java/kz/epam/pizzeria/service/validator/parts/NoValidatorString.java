@@ -2,9 +2,6 @@ package kz.epam.pizzeria.service.validator.parts;
 
 import kz.epam.pizzeria.service.validator.Validator;
 
-/**
- * Validator what always return true
- */
 public class NoValidatorString implements Validator<String> {
     private static NoValidatorString INSTANCE = new NoValidatorString();
 

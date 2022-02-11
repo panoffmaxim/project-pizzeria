@@ -1,12 +1,8 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
-import kz.epam.pizzeria.service.validator.parts.NoValidatorString;
 import kz.epam.pizzeria.service.validator.parts.PasswordValidator;
 
-/**
- * Dedicated to parse String to password value
- */
 public class PasswordParser extends ParamsParser<String> {
     private static PasswordParser INSTANCE = new PasswordParser();
 
@@ -15,8 +11,7 @@ public class PasswordParser extends ParamsParser<String> {
     }
 
     private PasswordParser() {
-//        super(PasswordValidator.getInstance());
-        super(NoValidatorString.getInstance());
+        super(PasswordValidator.getInstance());
     }
 
     @Override

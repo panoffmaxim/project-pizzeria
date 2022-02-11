@@ -5,15 +5,10 @@ body {
     justify-content: space-between;
 }
 
-
 header {
     padding-top: 150px;
 }
 
-
-/*.body__form label {*/
-/*    display: none;*/
-/*}*/
 .first__row label, .sec__row label {
     display: none;
 }
@@ -45,7 +40,6 @@ header {
 }
 
 .comments__row textarea {
-    /*max-width: inherit;*/
     resize: none;
 }
 
@@ -57,5 +51,3 @@ header {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
-

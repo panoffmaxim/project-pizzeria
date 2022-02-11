@@ -4,8 +4,6 @@
 <jsp:useBean id="orders" scope="request" type="java.util.List<kz.epam.pizzeria.entity.db.impl.Order>"/>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,7 +16,6 @@
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="fragments/navPanel.jsp"/>
 
@@ -64,7 +61,6 @@
                     <td>
                         <c:if test="${order.deliveryInf!=null}">
                             <span><c:out value="${order.deliveryInf.street}"/></span>
-                            &nbsp;
                             <span><c:out value="${order.deliveryInf.house}"/></span>
                         </c:if>
                     </td>

@@ -6,17 +6,12 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.Locale;
 
-@SuppressWarnings("serial")
 public class RevenueTableTag extends TagSupport {
     private String head;
     private int rows;
 
     public void setHead(String head) {
         this.head = head;
-    }
-
-    public void setRows(Integer rows) {
-        this.rows = rows;
     }
 
     @Override

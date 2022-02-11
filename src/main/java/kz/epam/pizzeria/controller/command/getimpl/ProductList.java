@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
 
 public class ProductList extends Command {
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -34,7 +35,7 @@ public class ProductList extends Command {
             request.setAttribute("paginationMap", paginationService.calculate(productService.findAll().size(), part, MAX_PAGINATION_ELEMENTS));
             return new Forward("/admin/product-list.jsp");
         } catch (ServiceException e) {
-            return new SendError(500);
+            return new SendError(STATUS_CODE_500);
         }
     }
 }

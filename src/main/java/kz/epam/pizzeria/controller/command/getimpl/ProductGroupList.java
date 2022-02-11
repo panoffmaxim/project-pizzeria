@@ -4,7 +4,6 @@ import kz.epam.pizzeria.controller.command.Command;
 import kz.epam.pizzeria.controller.utils.ResponseObject;
 import kz.epam.pizzeria.controller.utils.impl.Forward;
 import kz.epam.pizzeria.controller.utils.impl.SendError;
-import kz.epam.pizzeria.dao.exception.NullParamDaoException;
 import kz.epam.pizzeria.entity.db.impl.ProductGroup;
 import kz.epam.pizzeria.service.pagination.PaginationService;
 import kz.epam.pizzeria.service.db.ProductGroupService;
@@ -19,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
 
 public class ProductGroupList extends Command {
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -35,7 +35,7 @@ public class ProductGroupList extends Command {
             request.setAttribute("paginationMap", paginationService.calculate(productGroupService.count(), part, MAX_PAGINATION_ELEMENTS));
             return new Forward("/admin/product-group-list.jsp");
         } catch (ServiceException e) {
-            return new SendError(500);
+            return new SendError(STATUS_CODE_500);
         }
     }
 }

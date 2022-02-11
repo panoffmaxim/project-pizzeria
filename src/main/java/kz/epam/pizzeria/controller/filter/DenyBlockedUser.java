@@ -2,7 +2,6 @@ package kz.epam.pizzeria.controller.filter;
 
 import kz.epam.pizzeria.entity.db.impl.User;
 import kz.epam.pizzeria.service.db.UserService;
-import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
 
 import javax.servlet.*;
@@ -10,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static kz.epam.pizzeria.controller.command.getimpl.PermissionDenied.STATUS_CODE_403;
 
 public class DenyBlockedUser implements Filter {
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -20,14 +21,14 @@ public class DenyBlockedUser implements Filter {
         User user = (User) session.getAttribute("user");
         if (user != null && user.isBlocked()) {
             session.setAttribute("user", null);
-            res.sendError(403);
+            res.sendError(STATUS_CODE_403);
         } else {
             chain.doFilter(req, res);
         }
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -41,5 +42,9 @@ public class DenyBlockedUser implements Filter {
 
     @Override
     public void destroy() {
+    }
+
+    public UserService getUserService() {
+        return userService;
     }
 }

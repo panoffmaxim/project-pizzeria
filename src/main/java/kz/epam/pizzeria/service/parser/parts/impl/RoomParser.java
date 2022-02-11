@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.RoomValidator;
 
-/**
- * Dedicated to parse String to room value
- */
 public class RoomParser extends ParamsParser<String> {
     private static RoomParser INSTANCE = new RoomParser();
 

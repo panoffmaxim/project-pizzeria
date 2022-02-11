@@ -11,7 +11,6 @@ import kz.epam.pizzeria.entity.enums.OrderStatus;
 import kz.epam.pizzeria.entity.enums.PaymentType;
 import kz.epam.pizzeria.entity.db.impl.Order;
 import kz.epam.pizzeria.service.db.OrderService;
-import kz.epam.pizzeria.service.exception.IllegalPathParamException;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
 import kz.epam.pizzeria.service.parser.helper.PathVarCalculator;
@@ -24,13 +23,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.EnumSet;
 
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
+
 public class EditOrder extends Command {
     private static final Logger LOGGER = LogManager.getLogger(EditOrder.class);
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private final PathVarCalculator pathVarCalculator = serviceFactory.getPathVarCalculator();
     private final OrderService orderService = serviceFactory.getOrderService();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-ddThh:mm");
 
     @Override
     public ResponseObject execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +46,7 @@ public class EditOrder extends Command {
                 return new Forward("/edit-order.jsp");
             } else {
                 LOGGER.info("order is null");
-                return new SendError(500);
+                return new SendError(STATUS_CODE_500);
             }
         } catch (ServiceException e) {
             LOGGER.info("Problem in parsing");

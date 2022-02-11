@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-@SuppressWarnings("serial")
 public class InfoTimeTag extends TagSupport {
 
     @Override
@@ -25,7 +24,7 @@ public class InfoTimeTag extends TagSupport {
     }
 
     @Override
-    public int doEndTag() throws JspException {
+    public int doEndTag() {
         return EVAL_PAGE;
     }
 }

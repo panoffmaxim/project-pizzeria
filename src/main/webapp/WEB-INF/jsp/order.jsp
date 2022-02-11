@@ -1,10 +1,7 @@
-<%--@elvariable id="sum" type="java.lang.Integer"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<jsp:useBean id="productMap" scope="request" type="java.util.Map<Product,java.lang.Integer>"/>--%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
-
 
 <!doctype html>
 <html lang="en">
@@ -38,7 +35,6 @@
                 </div>
             </c:if>
         </header>
-
 
         <div class="product-list">
             <%--@elvariable id="productMap" type="java.util.Map<kz.epam.pizzeria.entity.db.impl.Product,java.lang.Integer>"--%>
@@ -157,8 +153,6 @@
 
 
                                         <div class="name__row">
-                                                <%--@elvariable id="redirect_name_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_name" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_name_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -172,8 +166,6 @@
                                                    pattern="^[A-Za-zА-Яа-яЁё]+(([',. \\-][A-Za-zА-Яа-яЁё ])?[A-Za-zА-Яа-яЁё]*)*$">
                                         </div>
                                         <div class="time__row">
-                                                <%--@elvariable id="redirect_time_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_time" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_time_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -185,8 +177,6 @@
                                                    required>
                                         </div>
                                         <div class="first__row">
-                                                <%--@elvariable id="redirect_street_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_street" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_street_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -194,8 +184,6 @@
                                                    placeholder="<fmt:message key="web.inputs.street" bundle="${ rb }"/>"
                                                    name="street" value="<c:out value="${redirect_street}"/>"
                                                    required>
-                                                <%--@elvariable id="redirect_house_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_house" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_house_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -205,16 +193,12 @@
                                                    required>
                                         </div>
                                         <div class="sec__row">
-                                                <%--@elvariable id="redirect_room_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_room" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_room_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
                                             <input type="text" class="form-control" id="room"
                                                    placeholder="<fmt:message key="web.inputs.room" bundle="${ rb }"/>"
                                                    name="room" value="<c:out value="${redirect_room}"/>">
-                                                <%--@elvariable id="redirect_porch_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_porch" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_porch_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -223,8 +207,6 @@
                                                    placeholder="<fmt:message key="web.inputs.porch" bundle="${ rb }"/>"
                                                    name="porch" value="<c:out value="${redirect_porch}"/>"
                                                    min="1" max="49">
-                                                <%--@elvariable id="redirect_floor_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_floor" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_floor_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -234,8 +216,6 @@
                                                    min="-99" max="99">
                                         </div>
                                         <div class="phone__row">
-                                                <%--@elvariable id="redirect_tel_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_tel" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_tel_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -247,8 +227,6 @@
                                                    pattern="\d{9}" required>
                                         </div>
                                         <div class="email__row">
-                                                <%--@elvariable id="redirect_email_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_email" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_email_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -276,8 +254,6 @@
                                         </div>
 
                                         <div class="comments__row">
-                                                <%--@elvariable id="redirect_comments_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_comments" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_comments_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -295,7 +271,6 @@
                                     </button>
                                 </form>
                             </c:when>
-                            <%--@elvariable id="role" type="kz.epam.pizzeria.entity.enums.Role"--%>
                             <c:when test="${role eq 'CLIENT'}">
 
                                 <jsp:useBean id="info" scope="request" type="kz.epam.pizzeria.controller.dto.UserDTO"/>
@@ -315,8 +290,6 @@
 
 
                                         <div class="name__row">
-                                                <%--@elvariable id="redirect_name_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_name" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_name_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -330,8 +303,6 @@
                                                    pattern="^[A-Za-zА-Яа-яЁё]+(([',. \\-][A-Za-zА-Яа-яЁё ])?[A-Za-zА-Яа-яЁё]*)*$">
                                         </div>
                                         <div class="time__row">
-                                                <%--@elvariable id="redirect_time_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_time" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_time_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -343,8 +314,6 @@
                                                    required>
                                         </div>
                                         <div class="first__row">
-                                                <%--@elvariable id="redirect_street_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_street" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_street_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -354,8 +323,6 @@
                                                    name="street" title="<c:out value="${redirect_street}"/>"
                                                    value="<c:out value="${info.street}"/>"
                                                    required>
-                                                <%--@elvariable id="redirect_house_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_house" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_house_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -366,8 +333,6 @@
                                                    required>
                                         </div>
                                         <div class="sec__row">
-                                                <%--@elvariable id="redirect_room_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_room" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_room_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -375,8 +340,6 @@
                                                    placeholder="<fmt:message key="web.inputs.room" bundle="${ rb }"/>"
                                                    id="room" name="room" value="<c:out value="${info.room}"/>"
                                                    title="<c:out value="${redirect_room}"/>">
-                                                <%--@elvariable id="redirect_porch_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_porch" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_porch_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -386,8 +349,6 @@
                                                    title="<c:out value="${redirect_porch}"/>"
                                                    min="1" max="49">
 
-                                                <%--@elvariable id="redirect_floor_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_floor" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_floor_error}">
                                                 <span class="error__message hid" hidden></span>
                                             </c:if>
@@ -398,8 +359,6 @@
                                                    min="-99" max="99">
                                         </div>
                                         <div class="phone__row">
-                                                <%--@elvariable id="redirect_tel_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_tel" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_tel_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -413,8 +372,6 @@
                                         </div>
 
                                         <div class="email__row">
-                                                <%--@elvariable id="redirect_email_error" type="java.lang.String"--%>
-                                                <%--@elvariable id="redirect_email" type="java.lang.String"--%>
                                             <c:if test="${not empty redirect_email_error}">
                                                 <span class="error__message">
                                                     <fmt:message key="web.errors.field" bundle="${ rb }"/>
@@ -446,7 +403,6 @@
                                     <textarea class="form-control" name="comments"
                                               placeholder="<fmt:message key="web.inputs.comments" bundle="${ rb }"/>"
                                               maxlength="200">
-                                        <%--@elvariable id="redirect_comments" type="java.lang.String"--%>
                                         <c:out value="${redirect_comments}"/>
                                     </textarea>
                                         </div>
@@ -458,7 +414,6 @@
                             </c:when>
                         </c:choose>
 
-
                     </div>
                 </div>
             </div>
@@ -469,12 +424,9 @@
 
 <c:import url="fragments/footer.jsp"/>
 
-
 <tag:impfoot/>
 
-
 <script src="<c:url value="/static/js/order/modals.js"/>"></script>
-
 
 </body>
 </html>

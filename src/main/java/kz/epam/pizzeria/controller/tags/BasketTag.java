@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("serial")
 public class BasketTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger(BasketTag.class);
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -49,7 +48,6 @@ public class BasketTag extends TagSupport {
         LOGGER.debug("session took");
         Role role = (Role) req.getAttribute("role");
         LOGGER.debug("role = {}", role);
-        Map<Product, Integer> basket;
         if (role == Role.ANON) {
             return returnAnonBasket(session);
         } else if (role == Role.CLIENT) {

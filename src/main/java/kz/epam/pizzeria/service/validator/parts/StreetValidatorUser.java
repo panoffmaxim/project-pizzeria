@@ -18,5 +18,4 @@ public class StreetValidatorUser implements Validator<String> {
     public boolean isValid(String input) {
         return input == null || (!input.isEmpty() && input.length() < MAX_LENGTH);
     }
-
 }

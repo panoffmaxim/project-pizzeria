@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="ctg" uri="custom-tags" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -12,14 +12,7 @@
 <body>
 <footer class="bg-dark">
 
-    <%--    <c:if test="${param.lang == null}">--%>
-    <%--        <fmt:setLocale value="ru-RU"/>--%>
-    <%--    </c:if>--%>
-    <%--    <c:if test="${param.lang != null}">--%>
-    <%--        <fmt:setLocale value="${param.lang}"/>--%>
-    <%--    </c:if>--%>
     <fmt:setBundle basename="property.text" var="rb"/>
-
 
     <div class="container">
         <a href="?">
@@ -44,14 +37,6 @@
             <input type="submit" value="<fmt:message key="web.lang.en" bundle="${ rb }"/>">
         </form>
 
-                <%--        <a href="?">--%>
-        <%--            <ctg:hello role="${param.role}"/>--%>
-        <%--        </a>--%>
-        <%--        <ctg:table-revenue rows="${ rw.size }" head="Revenue">--%>
-        <%--            ${ rw.revenue }--%>
-        <%--        </ctg:table-revenue>--%>
-        <%--        <a href=""><br><br></a>--%>
-        <%--        <ctg:table-revenue>5 rub BulbaComp</ctg:table-revenue>--%>
     </div>
 
 </footer>

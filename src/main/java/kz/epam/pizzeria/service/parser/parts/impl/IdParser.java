@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.IdValidator;
 
-/**
- * Dedicated to parse String to id of Integer
- */
 public class IdParser extends ParamsParser<Integer> {
     private static IdParser INSTANCE = new IdParser();
 

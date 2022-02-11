@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.WeightValidator;
 
-/**
- * Dedicated to parse String to weight value
- */
 public class WeightParser extends ParamsParser<Integer> {
     private static WeightParser INSTANCE = new WeightParser();
 

@@ -1,12 +1,8 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
-import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.CommentsValidator;
 
-/**
- * Dedicated to parse String to {@link DeliveryInf#getComments()}
- */
 public class CommentsParser extends ParamsParser<String> {
     private static CommentsParser INSTANCE = new CommentsParser();
 

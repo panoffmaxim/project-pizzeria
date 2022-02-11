@@ -24,7 +24,6 @@
 </head>
 <body>
 
-
 <c:import url="../fragments/navPanel.jsp"/>
 <header>
     <h1>Resource you try to access is forbidden</h1>
@@ -35,7 +34,6 @@
 </main>
 
 <c:import url="../fragments/footer.jsp"/>
-
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

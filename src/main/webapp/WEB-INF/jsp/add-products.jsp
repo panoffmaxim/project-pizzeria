@@ -12,12 +12,10 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/add-products/main.css' />">
 
-
 </head>
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="fragments/navPanel.jsp"/>
 
@@ -123,9 +121,6 @@
         <div class="sum-text">
             <fmt:message key="web.text.sum-order" bundle="${ rb }"/>
         </div>
-        <%--        <div class="sum-price"> <c:out value="${sum}"/>--%>
-        <%--            <fmt:message key="web.text.kzt" bundle="${ rb }"/>--%>
-        <%--        </div>--%>
         <div class="sum-price">
             <tag:money input="${sum}"/>
         </div>
@@ -136,7 +131,6 @@
 <c:import url="fragments/footer.jsp"/>
 
 <tag:impfoot/>
-
 
 </body>
 </html>

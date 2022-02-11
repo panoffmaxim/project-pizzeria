@@ -14,7 +14,7 @@ public class OptionalNullable<T> {
 
     public static <T> OptionalNullable<T> of(T input) {
         if (input == null) {
-            return new OptionalNullable<T>(Optional.empty(), true);
+            return new OptionalNullable<>(Optional.empty(), true);
         } else {
             return new OptionalNullable<>(Optional.of(input), false);
         }

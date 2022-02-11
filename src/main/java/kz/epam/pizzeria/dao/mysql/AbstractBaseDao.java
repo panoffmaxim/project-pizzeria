@@ -5,16 +5,13 @@ import org.apache.logging.log4j.Logger;
 
 import kz.epam.pizzeria.dao.AbstractDao;
 import kz.epam.pizzeria.dao.exception.DaoException;
-import kz.epam.pizzeria.dao.pool.ConnectionPool;
 import kz.epam.pizzeria.entity.db.Entity;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//переименовать AbstractBaseDao??
 public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements AbstractDao<ID, T> {
-    private ConnectionPool connectionPool = ConnectionPool.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(AbstractBaseDao.class);
     private final String findAllSql;
     private final String findEntityByIdSql;
@@ -70,19 +67,11 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
             }
         } catch (SQLException | NullPointerException e) {
             LOGGER.info("e: ", e);
-//            throw new DaoException(e);
         }
         return entities;
     }
 
     protected abstract T findEntity(ResultSet resultSet) throws SQLException;
-
-    /**
-     * @param id Identifier of entity in {@code MySQL} database
-     * @return instance of class {@link Entity}
-     * @throws NullPointerException if the input is {@code null}
-     *                              {@link NullPointerException}
-     */
 
     @Override
     public T findEntityById(ID id, Transaction transaction) {

@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
+
 public class CreateProductGroup extends Command {
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private final ProductService productService = serviceFactory.getProductService();
@@ -28,7 +30,7 @@ public class CreateProductGroup extends Command {
             request.setAttribute("types", ProductType.values());
             return new Forward("/admin/create-product-group.jsp");
         } catch (ServiceException e) {
-            return new SendError(500);
+            return new SendError(STATUS_CODE_500);
         }
     }
 }

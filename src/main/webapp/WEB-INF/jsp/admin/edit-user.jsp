@@ -4,7 +4,6 @@
 <jsp:useBean id="user" scope="request" type="kz.epam.pizzeria.entity.db.impl.User"/>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,12 +12,10 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/admin/create_user.css' />">
 
-
 </head>
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="../fragments/navPanel.jsp"/>
 <header>
@@ -62,24 +59,6 @@
                            class="form-control" value="<c:out value="${user.username}"/>"
                            required pattern="[A-Za-zА-Яа-яЁё\d]{1,20}">
                 </div>
-
-<%--                <div class="password">--%>
-<%--                    <label for="password">--%>
-<%--                        <fmt:message key="web.inputs.password" bundle="${ rb }"/>--%>
-<%--                    </label>--%>
-
-<%--                    <c:if test="${not empty redirect_password_error}">--%>
-<%--                    <span class="error__message"--%>
-<%--                          title="<fmt:message key="web.inputs.err-value" bundle="${ rb }"/>: <c:out value="${redirect_password}"/>">--%>
-<%--                        <fmt:message key="web.errors.password" bundle="${ rb }"/>--%>
-<%--                    </span>--%>
-<%--                    </c:if>--%>
-
-<%--                    <input type="text" id="password" name="password"--%>
-<%--                           placeholder="<fmt:message key="web.inputs.password" bundle="${ rb }"/>"--%>
-<%--                           class="form-control" value="<c:out value="${user.password}"/>"--%>
-<%--                           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required>--%>
-<%--                </div>--%>
 
                 <div class="role__row">
                     <label for="role">

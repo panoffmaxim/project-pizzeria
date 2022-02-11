@@ -36,7 +36,6 @@ public class MailSenderImpl implements MailSender {
     public boolean sendRegistration(String email, String url, Locale locale, TreeMap<String, String> parameters) {
         LOGGER.debug("parameters = {}", parameters);
         try {
-//            locale = Locale.getDefault();
             ResourceBundle rb = ResourceBundle.getBundle("property.text", locale);
             String msg = rb.getString("email.registration.confirm");
             LOGGER.debug("msg = {}", msg);
@@ -64,19 +63,14 @@ public class MailSenderImpl implements MailSender {
 
     private String message(String url, String msg, TreeMap<String, String> parameters) {
         StringBuilder sb = new StringBuilder();
-        //language=HTML
         sb.append("<div>").append(msg).append("</div>");
-        //language=HTML
         sb.append("<form method='post' action='").append(url).append("'>");
-        //language=HTML
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
             sb.append("<input name='").append(entry.getKey())
                     .append("' type='hidden' value='")
                     .append(entry.getValue()).append("'>");
         }
-        //language=HTML
         sb.append("<button type='submit'>Submit</button>");
-//        language=HTML
         sb.append("</form>");
         return sb.toString();
     }

@@ -4,7 +4,6 @@
 <jsp:useBean id="products" scope="request" type="java.util.List<kz.epam.pizzeria.entity.db.impl.Product>"/>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -79,7 +78,6 @@
     <tag:pagination paginationMap="${paginationMap}" url="/page/admin/product-list" current="${param.pagination}"/>
 </main>
 <c:import url="../fragments/footer.jsp"/>
-
 
 <tag:impfoot/>
 

@@ -5,33 +5,23 @@ import kz.epam.pizzeria.entity.enums.Role;
 import kz.epam.pizzeria.entity.db.impl.User;
 
 import java.sql.*;
-import java.time.ZoneId;
 
-//переименовать в UserDaoImpl
-public class UserMysqlDao extends AbstractBaseDao<Integer, User> {
+public class UserDaoImpl extends AbstractBaseDao<Integer, User> {
     private final DaoHelper daoHelper = DaoHelper.getInstance();
-    public static final ZoneId DEFAULT_ZONE = ZoneId.systemDefault();
-    // language=SQL
     public static final String FIND_ALL_SQL = "SELECT id, creation, name, password, phone, role, surname, username, email, " +
             "floor, house, porch, room, street, is_blocked FROM user ORDER BY id;";
-    // language=SQL
     private static final String findAllByPart = "SELECT id, creation, name, password, phone, role, surname, username, email, " +
             "floor, house, porch, room, street, is_blocked FROM user ORDER BY id LIMIT ? OFFSET ?;";
-    // language=SQL
     public static final String FIND_ENTITY_BY_ID_SQL = "SELECT id, creation, name, password, phone, role, surname, username, email, " +
             "floor, house, porch, room, street, is_blocked FROM user WHERE id = ?";
-    // language=SQL
     public static final String DELETE_BY_ID_SQL = "DELETE FROM user WHERE id = ?";
-    // language=SQL
     public static final String CREATE_SQL = "INSERT INTO user (creation, name, password, phone, role, surname, username, email, " +
             "floor, house, porch, room, street, is_blocked) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    // language=SQL
     public static final String UPDATE_SQL = "UPDATE user SET  creation = ?, name = ?, password = ?, phone = ?, role = ?, surname = ?, " +
             "username = ?, email = ?, floor = ?, house = ?, porch = ?, room = ?, street = ?, is_blocked = ? WHERE id = ?;";
-    // language=SQL
     private static final String countSql = "SELECT count(id) FROM user;";
 
-    public UserMysqlDao() {
+    public UserDaoImpl() {
         super(FIND_ALL_SQL, FIND_ENTITY_BY_ID_SQL, DELETE_BY_ID_SQL, CREATE_SQL, UPDATE_SQL, findAllByPart, countSql);
     }
 

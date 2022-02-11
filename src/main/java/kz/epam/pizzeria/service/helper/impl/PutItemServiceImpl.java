@@ -16,10 +16,6 @@ public class PutItemServiceImpl implements PutItemService {
     private PutItemServiceImpl() {
     }
 
-    /**
-     * @param product  {@link Product} to put
-     * @param products a basket in what should be put the product
-     */
     @Override
     public void putProduct(Product product, Map<Product, Integer> products) {
         Optional<Product> any = products.keySet().stream()

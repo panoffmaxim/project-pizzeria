@@ -3,7 +3,7 @@ package kz.epam.pizzeria.service.db.impl;
 import kz.epam.pizzeria.dao.DAOFactory;
 import kz.epam.pizzeria.dao.exception.DaoException;
 import kz.epam.pizzeria.dao.mysql.Transaction;
-import kz.epam.pizzeria.dao.mysql.impl.UserMysqlDao;
+import kz.epam.pizzeria.dao.mysql.impl.UserDaoImpl;
 import kz.epam.pizzeria.entity.db.impl.User;
 import kz.epam.pizzeria.service.db.UserService;
 import kz.epam.pizzeria.service.exception.IllegalIdException;
@@ -15,68 +15,39 @@ import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 
 public class UserServiceImpl implements UserService {
     private final DAOFactory dAOFactory = DAOFactory.getInstance();
-    private final UserMysqlDao userMysqlDao = dAOFactory.getUserMysqlDao();
-
-    /**
-     * @return List of all {@link User} in base
-     * @throws ServiceException if service can't connect to the database
-     */
+    private final UserDaoImpl userDaoImpl = dAOFactory.getUserMysqlDao();
 
     @Override
     public List<User> findAll() throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            return userMysqlDao.findAll(transaction);
+            return userDaoImpl.findAll(transaction);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * @param part number of part of all entities {@link User} from the database,
-     *             where maximum number of entities in one part is
-     *             {@value kz.epam.pizzeria.config.Configuration#MAX_PAGINATION_ELEMENTS}
-     * @return List of {@link User} from the database related to part from input
-     * or empty list if there no so part in database
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public List<User> findAllByPart(int part) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            return userMysqlDao.findAllByPart(transaction, (part - 1) * MAX_PAGINATION_ELEMENTS, MAX_PAGINATION_ELEMENTS);
+            return userDaoImpl.findAllByPart(transaction, (part - 1) * MAX_PAGINATION_ELEMENTS, MAX_PAGINATION_ELEMENTS);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * @param id identifier of {@link User}
-     * @return entity from database identified by id, or {@code null} if
-     * there no entity with so id
-     * @throws ServiceException if service can't connect to the database
-     * @see kz.epam.pizzeria.entity.db.Entity
-     */
 
     @Override
     public User findEntityById(Integer id) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            return userMysqlDao.findEntityById(id, transaction);
+            return userDaoImpl.findEntityById(id, transaction);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * @param id identifier of {@link User}
-     * @return true if entity successfully deleted,
-     * otherwise return false
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public boolean deleteById(Integer id) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            boolean result = userMysqlDao.deleteById(id, transaction);
+            boolean result = userDaoImpl.deleteById(id, transaction);
             if (result) {
                 transaction.commit();
             } else {
@@ -87,18 +58,11 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * @param entity what dedicated to delete {@link User}
-     * @return true if entity successfully deleted,
-     * otherwise return false
-     * @throws ServiceException if service can't connect to the database
-     */
 
     @Override
     public boolean delete(User entity) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            boolean result = userMysqlDao.delete(entity, transaction);
+            boolean result = userDaoImpl.delete(entity, transaction);
             if (result) {
                 transaction.commit();
             } else {
@@ -110,16 +74,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    /**
-     * @param entity {@link User} dedicated to create
-     * @return created entity with new id, or {@code null} if entity can't be created
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public User create(User entity) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            User user = userMysqlDao.create(entity, transaction);
+            User user = userDaoImpl.create(entity, transaction);
             if (user == null) {
                 transaction.rollBack();
             } else {
@@ -131,20 +89,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    /**
-     * @param entity {@link User} dedicated to update identified by id
-     *               {@link kz.epam.pizzeria.entity.db.Entity}
-     * @return true if entity successfully updated otherwise returns false
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public boolean update(User entity) throws ServiceException {
-//        if (!takeOldIfPasswordNull(entity)) {
-//            return false;
-//        }
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            boolean result = userMysqlDao.update(entity, transaction);
+            boolean result = userDaoImpl.update(entity, transaction);
             if (result) {
                 transaction.commit();
             } else {
@@ -156,28 +104,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private boolean takeOldIfPasswordNull(User entity) throws ServiceException {
-        if (entity == null || entity.getId() == null) {
-            return false;
-        }
-        if (entity.getPassword() == null) {
-            User entityById = findEntityById(entity.getId());
-            if (entityById != null) {
-                entity.setPassword(entityById.getPassword());
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * @param username from {@link User} what method should find
-     * @return {@link User} from database with {@link User#getUsername()}
-     * equals username from input, or {@code null} if there not so User
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public User findUserByUsername(String username) throws ServiceException {
         return findAll().stream()
@@ -187,30 +113,19 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    /**
-     * Block user identified by id
-     * Set field blocked by {@link User#setBlocked(boolean)} to true
-     * and than commit to the database
-     *
-     * @param id identifier of {@link User}
-     * @throws IllegalIdException if id less than  or equals 0 or id is null
-     *                            or there no so user identified by id in database
-     * @throws ServiceException   if service can't connect to the database
-     */
-
     @Override
     public void blockById(Integer id) throws ServiceException {
         if (id == null || id <= 0) {
             throw new IllegalIdException("id = " + id);
         }
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            User entityById = userMysqlDao.findEntityById(id, transaction);
+            User entityById = userDaoImpl.findEntityById(id, transaction);
             if (entityById == null) {
                 throw new IllegalIdException("id = " + id);
             }
             if (!entityById.isBlocked()) {
                 entityById.setBlocked(true);
-                boolean update = userMysqlDao.update(entityById, transaction);
+                boolean update = userDaoImpl.update(entityById, transaction);
                 if (!update) {
                     transaction.rollBack();
                     throw new IllegalIdException("id = " + id);
@@ -222,17 +137,6 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
-
-    /**
-     * Block user identified by id
-     * Set field blocked by {@link User#setBlocked(boolean)} to false
-     * and than commit to the database
-     *
-     * @param id identifier of {@link User}
-     * @throws IllegalIdException if id less than  or equals 0 or id is null
-     *                            or there no so user identified by id in database
-     * @throws ServiceException   if service can't connect to the database
-     */
 
     @Override
     public void unBlockById(Integer id) throws ServiceException {
@@ -240,13 +144,13 @@ public class UserServiceImpl implements UserService {
             throw new IllegalIdException("id = " + id);
         }
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            User entityById = userMysqlDao.findEntityById(id, transaction);
+            User entityById = userDaoImpl.findEntityById(id, transaction);
             if (entityById == null) {
                 throw new IllegalIdException("id = " + id);
             }
             if (entityById.isBlocked()) {
                 entityById.setBlocked(false);
-                boolean update = userMysqlDao.update(entityById, transaction);
+                boolean update = userDaoImpl.update(entityById, transaction);
                 if (!update) {
                     transaction.rollBack();
                     throw new IllegalIdException("id = " + id);
@@ -259,15 +163,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    /**
-     * @return count of {@link User} in the database
-     * @throws ServiceException if service can't connect to the database
-     */
-
     @Override
     public int count() throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
-            return userMysqlDao.count(transaction);
+            return userDaoImpl.count(transaction);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

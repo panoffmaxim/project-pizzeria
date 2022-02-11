@@ -2,9 +2,6 @@ package kz.epam.pizzeria.service.validator.parts;
 
 import kz.epam.pizzeria.service.validator.Validator;
 
-/**
- * Dedicated to validate id with Integer type
- */
 public class IdValidator implements Validator<Integer> {
     private static IdValidator INSTANCE = new IdValidator();
 

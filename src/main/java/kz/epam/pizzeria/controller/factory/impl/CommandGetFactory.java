@@ -34,7 +34,6 @@ public class CommandGetFactory implements CommandFactory {
     public static final String LOGIN_PAGE = "/login";
 
     static {
-//        commandMap.put("/second", new MainCommand());
         commandMap.put("/something_went_wrong", new SomethingWentWrong());
         /*language=RegExp*/
         commandMap.put("/?", new Index());

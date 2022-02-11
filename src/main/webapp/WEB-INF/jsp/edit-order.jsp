@@ -4,7 +4,6 @@
 <jsp:useBean id="order" scope="request" type="kz.epam.pizzeria.entity.db.impl.Order"/>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,12 +12,10 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/edit-order/main.css' />">
 
-
 </head>
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="fragments/navPanel.jsp"/>
 
@@ -118,21 +115,6 @@
                                required
                                pattern="^[A-Za-zА-Яа-яЁё]+(([',. \\-][A-Za-zА-Яа-яЁё ])?[A-Za-zА-Яа-яЁё]*)*$">
                     </div>
-<%--                    <div class="time__row">--%>
-<%--                        <label for="time">--%>
-<%--                            <fmt:message key="web.inputs.time" bundle="${ rb }"/>--%>
-<%--                            :--%>
-<%--                        </label>--%>
-<%--                        <c:if test="${not empty redirect_time_error}">--%>
-<%--                            <span class="error__message"--%>
-<%--                                  title="<fmt:message key="web.inputs.err-value" bundle="${ rb }"/>: <c:out value="${redirect_time}"/>">--%>
-<%--                                <fmt:message key="web.errors.field" bundle="${ rb }"/>--%>
-<%--                            </span>--%>
-<%--                        </c:if>--%>
-<%--                        <input type="time" id="time" name="time"--%>
-<%--                               placeholder="<fmt:message key="web.inputs.date-deliver" bundle="${ rb }"/>"--%>
-<%--                               class="form-control" value="${time}" required>--%>
-<%--                    </div>--%>
                     <div class="time__row">
                         <label for="time">
                             <fmt:message key="web.inputs.time" bundle="${ rb }"/>
@@ -283,9 +265,7 @@
 
 <c:import url="fragments/footer.jsp"/>
 
-
 <tag:impfoot/>
-
 
 </body>
 </html>

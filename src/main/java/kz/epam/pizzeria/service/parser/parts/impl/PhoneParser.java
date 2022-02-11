@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.PhoneValidator;
 
-/**
- * Dedicated to parse String to phone value
- */
 public class PhoneParser extends ParamsParser<String> {
     private static PhoneParser INSTANCE = new PhoneParser();
 

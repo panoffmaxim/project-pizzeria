@@ -6,6 +6,7 @@ import java.io.File;
 
 public class ImageWriterDao {
     public static final String DOWNLOAD_LOCATION = "src\\main\\webapp\\static\\img\\";
+
     public File downloadFile(FileItem part) throws Exception {
         String pathFromFile = DOWNLOAD_LOCATION + part.getName();
         File file = new File(pathFromFile);

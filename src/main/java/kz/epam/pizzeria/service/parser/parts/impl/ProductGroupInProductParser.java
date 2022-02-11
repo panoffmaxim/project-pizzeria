@@ -1,12 +1,8 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
-import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.ProductGroupInProductValidator;
 
-/**
- * Dedicated to parse String to {@link Product#getProductGroup()} id value
- */
 public class ProductGroupInProductParser extends ParamsParser<Integer> {
     private static ProductGroupInProductParser INSTANCE = new ProductGroupInProductParser();
 

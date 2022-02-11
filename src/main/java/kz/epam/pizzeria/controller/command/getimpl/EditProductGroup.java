@@ -7,13 +7,11 @@ import kz.epam.pizzeria.controller.command.Command;
 import kz.epam.pizzeria.controller.utils.ResponseObject;
 import kz.epam.pizzeria.controller.utils.impl.Forward;
 import kz.epam.pizzeria.controller.utils.impl.SendError;
-import kz.epam.pizzeria.dao.exception.NullParamDaoException;
 import kz.epam.pizzeria.entity.enums.ProductType;
 import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.entity.db.impl.ProductGroup;
 import kz.epam.pizzeria.service.db.ProductGroupService;
 import kz.epam.pizzeria.service.db.ProductService;
-import kz.epam.pizzeria.service.exception.IllegalPathParamException;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
 import kz.epam.pizzeria.service.parser.helper.PathVarCalculator;
@@ -23,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
 
 public class EditProductGroup extends Command {
     private static final Logger LOGGER = LogManager.getLogger(EditProductGroup.class);
@@ -45,7 +45,7 @@ public class EditProductGroup extends Command {
         } catch (ServiceException e) {
             LOGGER.debug("e: ", e);
         }
-        return new SendError(500);
+        return new SendError(STATUS_CODE_500);
     }
 
     private void putProducts(HttpServletRequest request) throws ServiceException {

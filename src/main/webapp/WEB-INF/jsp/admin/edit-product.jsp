@@ -13,12 +13,10 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/admin/edit_product/main.css' />">
 
-
 </head>
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="../fragments/navPanel.jsp"/>
 <header>
@@ -111,7 +109,6 @@
                            class="form-control" value="${product.weight}"
                            required min="1" max="1000000">
                 </div>
-
 
                 <div class="submit">
                     <label for="submit"></label>

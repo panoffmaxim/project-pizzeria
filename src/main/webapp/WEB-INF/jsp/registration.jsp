@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,16 +16,13 @@
 
 <fmt:setBundle basename="property.text" var="rb"/>
 
-
 <c:import url="fragments/navPanel.jsp"/>
-
 
 <header>
     <h1>
         <fmt:message key="web.text.registration" bundle="${ rb }"/>
     </h1>
 </header>
-
 
 <main class="container">
     <div class="create__data">
@@ -260,9 +256,7 @@
 
 <c:import url="fragments/footer.jsp"/>
 
-
 <tag:impfoot/>
-
 
 <script src="<c:url value="/static/js/registration/main.js"/>"></script>
 

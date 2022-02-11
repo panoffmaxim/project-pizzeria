@@ -1,6 +1,5 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
-import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.TimeValidator;
 
@@ -8,9 +7,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Dedicated to parse String to LocalDateTime for {@link DeliveryInf#getDeliveryTime()} value
- */
 public class TimeParser extends ParamsParser<LocalDateTime> {
     private static TimeParser INSTANCE = new TimeParser();
 

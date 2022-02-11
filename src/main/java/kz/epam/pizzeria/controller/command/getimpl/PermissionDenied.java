@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import kz.epam.pizzeria.controller.command.Command;
-import kz.epam.pizzeria.controller.command.PermissionDeniedException;
 import kz.epam.pizzeria.controller.factory.impl.CommandGetFactory;
 import kz.epam.pizzeria.controller.utils.ResponseObject;
 import kz.epam.pizzeria.controller.utils.impl.Redirect;
@@ -23,6 +22,7 @@ import static kz.epam.pizzeria.controller.filter.RedirectFilter.REDIRECTED_INFO;
 
 public class PermissionDenied extends Command {
     private static final Logger LOGGER = LogManager.getLogger(PermissionDenied.class);
+    public static final int STATUS_CODE_403 = 403;
 
     @Override
     public ResponseObject execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class PermissionDenied extends Command {
             session.setAttribute(REDIRECTED_INFO, redirect);
             return new Redirect(CommandGetFactory.LOGIN_PAGE);
         } else {
-            return new SendError(403);
+            return new SendError(STATUS_CODE_403);
         }
     }
 }

@@ -18,7 +18,6 @@
 
 <fmt:setBundle basename="property.text" var="rb"/>
 
-
 <c:import url="../fragments/navPanel.jsp"/>
 
 <header>

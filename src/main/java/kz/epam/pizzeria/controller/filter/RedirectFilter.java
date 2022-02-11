@@ -17,7 +17,7 @@ public class RedirectFilter implements Filter {
     public static final String REDIRECTED_INFO = "redirected_info";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -38,8 +38,6 @@ public class RedirectFilter implements Filter {
             request.setAttribute(PREFIX + entry.getKey(), entry.getValue());
         }
         session.removeAttribute(REDIRECTED_INFO);
-//        VendorMap map = new VendorMap();
-//        request.setAttribute("rw", map);
         LOGGER.debug("now will be doFilter");
         chain.doFilter(request, response);
     }

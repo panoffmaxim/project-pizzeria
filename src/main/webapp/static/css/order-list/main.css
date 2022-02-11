@@ -10,8 +10,6 @@ header {
     padding-top: 150px;
 }
 
-/*changes begin copiright from order*/
-
 .product-item {
     display: flex;
     justify-content: space-between;
@@ -45,12 +43,6 @@ header {
     align-items: center;
 }
 
-
-
-
-
-
-
 .flex-part i:hover {
     color: #ff6900;
 }
@@ -73,5 +65,3 @@ header {
     justify-content: flex-end;
     align-items: center;
 }
-
-/*changes end copiright from order*/

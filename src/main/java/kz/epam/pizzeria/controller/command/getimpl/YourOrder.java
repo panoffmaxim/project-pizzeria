@@ -9,7 +9,6 @@ import kz.epam.pizzeria.controller.utils.impl.Forward;
 import kz.epam.pizzeria.controller.utils.impl.SendError;
 import kz.epam.pizzeria.entity.db.impl.Order;
 import kz.epam.pizzeria.service.db.OrderService;
-import kz.epam.pizzeria.service.exception.IllegalPathParamException;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
 import kz.epam.pizzeria.service.parser.helper.PathVarCalculator;
@@ -18,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
 
 public class YourOrder extends Command {
     private static final Logger LOGGER = LogManager.getLogger(YourOrder.class);
@@ -45,6 +46,6 @@ public class YourOrder extends Command {
         } catch (ServiceException e) {
             LOGGER.debug("e:", e);
         }
-        return new SendError(500);
+        return new SendError(STATUS_CODE_500);
     }
 }

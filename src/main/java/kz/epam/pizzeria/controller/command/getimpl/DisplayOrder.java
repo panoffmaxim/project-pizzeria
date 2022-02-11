@@ -14,7 +14,6 @@ import kz.epam.pizzeria.entity.db.impl.Order;
 import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.entity.db.impl.User;
 import kz.epam.pizzeria.service.db.OrderService;
-import kz.epam.pizzeria.service.db.UserService;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
 
@@ -26,11 +25,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
+
 public class DisplayOrder extends Command {
     private static final Logger LOGGER = LogManager.getLogger(DisplayOrder.class);
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private final OrderService orderService = serviceFactory.getOrderService();
-    private final UserService userService = serviceFactory.getUserService();
 
     @Override
     public ResponseObject execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class DisplayOrder extends Command {
             sendUserDTO(request);
             return new Forward("/order.jsp");
         } catch (ServiceException e) {
-            return new SendError(500);
+            return new SendError(STATUS_CODE_500);
         }
     }
 
@@ -65,7 +65,6 @@ public class DisplayOrder extends Command {
         LOGGER.debug("session took");
         Role role = (Role) req.getAttribute("role");
         LOGGER.debug("role = {}", role);
-        Map<Product, Integer> basket;
         if (role == Role.ANON) {
             return returnAnonBasket(session);
         } else if (role == Role.CLIENT) {

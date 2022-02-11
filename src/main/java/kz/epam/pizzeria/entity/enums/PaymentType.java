@@ -1,5 +1,5 @@
 package kz.epam.pizzeria.entity.enums;
 
 public enum PaymentType {
-    CASH, BANK_CARD;
+    CASH, BANK_CARD
 }

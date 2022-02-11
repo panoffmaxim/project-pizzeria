@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.parser.parts.impl;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.BooleanParamValidator;
 
-/**
- * Dedicated to parse String to Boolean value
- */
 public class BooleanParser extends ParamsParser<Boolean> {
     private static BooleanParser INSTANCE = new BooleanParser();
 

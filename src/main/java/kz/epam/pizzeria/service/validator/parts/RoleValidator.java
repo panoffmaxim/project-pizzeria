@@ -3,9 +3,6 @@ package kz.epam.pizzeria.service.validator.parts;
 import kz.epam.pizzeria.entity.enums.Role;
 import kz.epam.pizzeria.service.validator.Validator;
 
-/**
- * Dedicated to validate {@link Role}
- */
 public class RoleValidator implements Validator<Role> {
     private static RoleValidator INSTANCE = new RoleValidator();
 
@@ -15,6 +12,7 @@ public class RoleValidator implements Validator<Role> {
 
     private RoleValidator() {
     }
+
     @Override
     public boolean isValid(Role input) {
         return input != null && input != Role.ANON;

@@ -10,23 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Order extends Entity<Integer> implements Serializable {
-
     private LocalDateTime creation;
-
     private String clientName;
-
     private Integer price;
-
     private OrderStatus status;
-
     private PaymentType paymentType;
-
     private DeliveryInf deliveryInf;
-
     private User user;
-
     private Map<Product, Integer> products = new HashMap<>();
-//    private List<Product> products = new ArrayList<>();
 
     public Order() {
     }

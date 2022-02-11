@@ -6,29 +6,16 @@ import kz.epam.pizzeria.entity.db.impl.User;
 public class UserDTO {
     private Integer id;
     private String username;
-
     private Role role;
-    //
     private String name;
-    //
     private String surname;
-    //
     private String street;
-    //
     private String house;
-    //
     private String room;
-    //
     private Integer porch;
-    //
     private Integer floor;
-    //
     private String phone;
-
     private String email;
-
-    public UserDTO() {
-    }
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -43,22 +30,6 @@ public class UserDTO {
         this.floor = user.getFloor();
         this.phone = user.getPhone();
         this.email = user.getEmail();
-    }
-
-    public UserDTO(Integer id, String username, Role role, String name, String surname, String street, String house, String room,
-                   Integer porch, Integer floor, String phone, String email) {
-        this.id = id;
-        this.username = username;
-        this.role = role;
-        this.name = name;
-        this.surname = surname;
-        this.street = street;
-        this.house = house;
-        this.room = room;
-        this.porch = porch;
-        this.floor = floor;
-        this.phone = phone;
-        this.email = email;
     }
 
     public String getUsername() {

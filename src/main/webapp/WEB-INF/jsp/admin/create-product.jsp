@@ -13,12 +13,10 @@
 
     <link rel="stylesheet" href="<c:url value='/static/css/admin/create_product/main.css' />">
 
-
 </head>
 <body>
 
 <fmt:setBundle basename="property.text" var="rb"/>
-
 
 <c:import url="../fragments/navPanel.jsp"/>
 <header>
@@ -92,7 +90,6 @@
                        required min="1" max="1000000">
             </div>
 
-
             <div class="submit">
                 <label for="submit"></label>
                 <button type="submit" id="submit" class="btn orange__bg">
@@ -105,7 +102,6 @@
 </main>
 
 <c:import url="../fragments/footer.jsp"/>
-
 
 <tag:impfoot/>
 

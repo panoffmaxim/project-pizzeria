@@ -42,15 +42,6 @@ public class MainServlet extends HttpServlet {
         executeMethod(commandPostFactory, request, response);
     }
 
-    /**
-     * @param commandFactory factory {@link CommandFactory} to create a command {@link Command}
-     * @param request        request from user
-     * @param response       response to user
-     * @throws ServletException          same as throws {@link HttpServlet}
-     * @throws IOException               same as throws {@link HttpServlet}
-     * @throws PermissionDeniedException if user can't execute specific command {@link Command}
-     */
-
     private void executeMethod(CommandFactory commandFactory,
                                HttpServletRequest request,
                                HttpServletResponse response) throws ServletException, IOException {

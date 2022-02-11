@@ -11,7 +11,6 @@ import kz.epam.pizzeria.entity.enums.ProductType;
 import kz.epam.pizzeria.entity.db.impl.Product;
 import kz.epam.pizzeria.entity.db.impl.ProductGroup;
 import kz.epam.pizzeria.service.db.ProductGroupService;
-import kz.epam.pizzeria.service.db.ProductService;
 import kz.epam.pizzeria.service.exception.ServiceException;
 import kz.epam.pizzeria.service.factory.ServiceFactory;
 
@@ -23,11 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static kz.epam.pizzeria.controller.command.getimpl.AddProducts.STATUS_CODE_500;
+
 public class Index extends Command {
     private static final Logger LOGGER = LogManager.getLogger(Index.class);
     private final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private final ProductGroupService productGroupService = serviceFactory.getProductGroupService();
-    private final ProductService productService = serviceFactory.getProductService();
 
     @Override
     public ResponseObject execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class Index extends Command {
             return new Forward("/index.jsp");
         } catch (ServiceException e) {
             LOGGER.error("Error:", e);
-            return new SendError(500);
+            return new SendError(STATUS_CODE_500);
         }
     }
 

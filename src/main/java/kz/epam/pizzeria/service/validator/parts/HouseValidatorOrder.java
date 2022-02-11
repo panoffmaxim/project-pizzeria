@@ -2,9 +2,6 @@ package kz.epam.pizzeria.service.validator.parts;
 
 import kz.epam.pizzeria.service.validator.Validator;
 
-/**
- * Dedicated to validate house
- */
 public class HouseValidatorOrder implements Validator<String> {
     public static final int MAX_LENGTH = 10;
     private static HouseValidatorOrder INSTANCE = new HouseValidatorOrder();
