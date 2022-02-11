@@ -18,14 +18,14 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 
 <div class="main-container">
     <c:import url="fragments/navPanel.jsp"/>
     <main class="container">
         <div class="title-container">
-            <fmt:message key="web.text.products" bundle="${ rb }"/>
+            <fmt:message key="web.text.products" bundle="${ lang }"/>
         </div>
         <div class="p_card-list">
             <c:forEach var="product_group" items="${products}">
@@ -41,10 +41,10 @@
                     </div>
                     <div class="p_card-footer md-2">
                     <span>
-                        <fmt:message key="web.text.from" bundle="${ rb }"/> <tag:money input="${product_group.value}"/>
+                        <fmt:message key="web.text.from" bundle="${ lang }"/> <tag:money input="${product_group.value}"/>
                     </span>
                         <button class="btn mr-5 myBtn">
-                            <fmt:message key="web.btn.choose" bundle="${ rb }"/>
+                            <fmt:message key="web.btn.choose" bundle="${ lang }"/>
                         </button>
                         <div class="modal">
                             <c:choose>
@@ -69,7 +69,7 @@
                                                                     <input type="radio" name="variant"
                                                                            value="${product.id}">
                                                                         ${product.weight}
-                                                                    <fmt:message key="web.gram" bundle="${ rb }"/>
+                                                                    <fmt:message key="web.gram" bundle="${ lang }"/>
                                                                     -
                                                                     <span> <tag:money input="${product.price}"/></span>
                                                                 </label>
@@ -79,7 +79,7 @@
                                                 </div>
 
                                                 <button class="btn orange__bg" type="submit">
-                                                    <fmt:message key="web.btn.add-basket" bundle="${ rb }"/>
+                                                    <fmt:message key="web.btn.add-basket" bundle="${ lang }"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                                                                     <input type="radio" name="variant"
                                                                            value="${product.id}">
                                                                         ${product.weight}
-                                                                    <fmt:message key="web.gram" bundle="${ rb }"/>
+                                                                    <fmt:message key="web.gram" bundle="${ lang }"/>
                                                                     -
                                                                     <span> <tag:money input="${product.price}"/></span>
                                                                 </label>
@@ -116,7 +116,7 @@
                                                 </div>
 
                                                 <button class="btn .orange__bg" type="submit">
-                                                    <fmt:message key="web.btn.add-basket" bundle="${ rb }"/>
+                                                    <fmt:message key="web.btn.add-basket" bundle="${ lang }"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -143,7 +143,7 @@
                                                                     <input type="radio" name="variant"
                                                                            value="${product.id}">
                                                                         ${product.weight}
-                                                                    <fmt:message key="web.gram" bundle="${ rb }"/>
+                                                                    <fmt:message key="web.gram" bundle="${ lang }"/>
                                                                     -
                                                                     <span><tag:money input="${product.price}"/></span>
                                                                 </label>
@@ -153,7 +153,7 @@
                                                 </div>
 
                                                 <button class="btn orange__bg" disabled type="submit">
-                                                    <fmt:message key="web.btn.add-basket" bundle="${ rb }"/>
+                                                    <fmt:message key="web.btn.add-basket" bundle="${ lang }"/>
                                                 </button>
                                             </div>
                                         </div>

@@ -15,13 +15,13 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 <c:import url="fragments/navPanel.jsp"/>
 
 <header class="container">
     <h1>
-        <fmt:message key="web.links.orders" bundle="${ rb }"/>
+        <fmt:message key="web.links.orders" bundle="${ lang }"/>
     </h1>
 </header>
 
@@ -31,25 +31,25 @@
             <thead>
             <tr>
                 <th>
-                    <fmt:message key="web.tab.order-number" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.order-number" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.order-status" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.order-status" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.address-deliv" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.address-deliv" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.price-order" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.price-order" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.cancel" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.cancel" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.edit" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.add-product" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.add-product" bundle="${ lang }"/>
                 </th>
             </tr>
             </thead>
@@ -69,7 +69,7 @@
                         <form action="<c:url value="/page/cancel_order"/>" method="post">
                             <input type="hidden" value="${order.id}" name="id">
                             <button class="btn orange__bg" type="submit">
-                                <fmt:message key="web.tab.cancel" bundle="${ rb }"/>
+                                <fmt:message key="web.tab.cancel" bundle="${ lang }"/>
                             </button>
                         </form>
                     </td>
@@ -78,12 +78,12 @@
                             <c:choose>
                                 <c:when test="${order.status eq 'WAITING'}">
                                     <button class="btn orange__bg" disabled>
-                                        <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                                        <fmt:message key="web.tab.edit" bundle="${ lang }"/>
                                     </button>
                                 </c:when>
                                 <c:otherwise>
                                     <button class="btn orange__bg">
-                                        <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                                        <fmt:message key="web.tab.edit" bundle="${ lang }"/>
                                     </button>
                                 </c:otherwise>
                             </c:choose>
@@ -92,7 +92,7 @@
                     <td>
                         <a href="<c:url value="/page/add-products/${order.id}?pagination=1"/>">
                             <button class="btn orange__bg">
-                                <fmt:message key="web.tab.add-product" bundle="${ rb }"/>
+                                <fmt:message key="web.tab.add-product" bundle="${ lang }"/>
                             </button>
                         </a>
                     </td>

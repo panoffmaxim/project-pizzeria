@@ -16,13 +16,13 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 <c:import url="../fragments/navPanel.jsp"/>
 
 <header>
     <h1>
-        <fmt:message key="web.links.products" bundle="${ rb }"/>
+        <fmt:message key="web.links.products" bundle="${ lang }"/>
     </h1>
 </header>
 
@@ -30,7 +30,7 @@
     <div class="create__new mb-5">
         <a href="<c:url value="/page/admin/create-product"/>">
             <button class="btn white__bg__orange">
-                <fmt:message key="web.text.create-product" bundle="${ rb }"/>
+                <fmt:message key="web.text.create-product" bundle="${ lang }"/>
             </button>
         </a>
     </div>
@@ -40,19 +40,19 @@
             <thead>
             <tr>
                 <th>
-                    <fmt:message key="web.tab.identifier" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.identifier" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.price" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.price" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.weight" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.weight" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.product-group" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.product-group" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.edit" bundle="${ lang }"/>
                 </th>
             </tr>
             </thead>
@@ -66,7 +66,7 @@
                     <td>
                         <a href="<c:url value="/page/admin/edit-product/${p.id}"/>">
                             <button class="btn orange__bg">
-                                <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                                <fmt:message key="web.tab.edit" bundle="${ lang }"/>
                             </button>
                         </a>
                     </td>

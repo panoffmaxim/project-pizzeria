@@ -16,13 +16,13 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 <c:import url="../fragments/navPanel.jsp"/>
 
 <header>
     <h1>
-        <fmt:message key="web.links.user-list" bundle="${ rb }"/>
+        <fmt:message key="web.links.user-list" bundle="${ lang }"/>
     </h1>
 </header>
 
@@ -30,7 +30,7 @@
     <div class="create__new mb-5">
         <a href="<c:url value="/page/admin/create-user"/>">
             <button class="btn white__bg__orange">
-                <fmt:message key="web.btn.create-user" bundle="${ rb }"/>
+                <fmt:message key="web.btn.create-user" bundle="${ lang }"/>
             </button>
         </a>
     </div>
@@ -40,34 +40,34 @@
             <thead>
             <tr>
                 <th>
-                    <fmt:message key="web.tab.identifier" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.identifier" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.is-blocked" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.is-blocked" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.role" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.role" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.username" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.username" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.name" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.name" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.inputs.surname" bundle="${ rb }"/>
+                    <fmt:message key="web.inputs.surname" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.address" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.address" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.details" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.details" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.block" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.block" bundle="${ lang }"/>
                 </th>
                 <th>
-                    <fmt:message key="web.tab.unblock" bundle="${ rb }"/>
+                    <fmt:message key="web.tab.unblock" bundle="${ lang }"/>
                 </th>
             </tr>
             </thead>
@@ -95,21 +95,21 @@
                     <td>
                         <a href="<c:url value="/page/admin/edit-user/${u.id}"/>">
                             <button class="btn orange__bg">
-                                <fmt:message key="web.tab.details" bundle="${ rb }"/>
+                                <fmt:message key="web.tab.details" bundle="${ lang }"/>
                             </button>
                         </a>
                     </td>
                     <td>
                         <form action="<c:url value="/page/admin/block/${u.id}"/>" method="post">
                             <button class="btn orange__bg" type="submit">
-                                <fmt:message key="web.tab.block" bundle="${ rb }"/>
+                                <fmt:message key="web.tab.block" bundle="${ lang }"/>
                             </button>
                         </form>
                     </td>
                     <td>
                         <form action="<c:url value="/page/admin/unblock/${u.id}"/>" method="post">
                             <button class="btn orange__bg" type="submit">
-                                <fmt:message key="web.tab.unblock" bundle="${ rb }"/>
+                                <fmt:message key="web.tab.unblock" bundle="${ lang }"/>
                             </button>
                         </form>
                     </td>

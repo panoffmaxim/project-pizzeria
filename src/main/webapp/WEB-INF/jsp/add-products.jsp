@@ -15,13 +15,13 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 <c:import url="fragments/navPanel.jsp"/>
 
 <header class="container">
     <h1>
-        <fmt:message key="web.tab.add-product" bundle="${ rb }"/>
+        <fmt:message key="web.tab.add-product" bundle="${ lang }"/>
     </h1>
 </header>
 
@@ -119,7 +119,7 @@
 
     <div class="sum">
         <div class="sum-text">
-            <fmt:message key="web.text.sum-order" bundle="${ rb }"/>
+            <fmt:message key="web.text.sum-order" bundle="${ lang }"/>
         </div>
         <div class="sum-price">
             <tag:money input="${sum}"/>

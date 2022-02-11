@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 <c:import url="fragments/navPanel.jsp"/>
 
@@ -26,73 +26,73 @@
     <table class="table">
         <tr>
             <td>
-                <fmt:message key="web.inputs.name" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.name" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.clientName}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.tab.order-number" bundle="${ rb }"/>
+                <fmt:message key="web.tab.order-number" bundle="${ lang }"/>
             </td>
             <td>${order.id}</td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.street" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.street" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.street}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.house" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.house" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.house}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.room" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.room" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.room}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.porch" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.porch" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.porch}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.floor" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.floor" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.floor}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.email" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.email" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.email}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.inputs.phone" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.phone" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.phone}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.tab.delivery-time" bundle="${ rb }"/>
+                <fmt:message key="web.tab.delivery-time" bundle="${ lang }"/>
             </td>
             <td><c:out value="${order.deliveryInf.deliveryTime}"/></td>
         </tr>
         <tr>
             <td>
-                <fmt:message key="web.tab.sum-order" bundle="${ rb }"/>
+                <fmt:message key="web.tab.sum-order" bundle="${ lang }"/>
             </td>
             <td><tag:money input="${order.price}"/></td>
         </tr>
     </table>
     <button type="button" class="btn orange__bg" data-toggle="collapse" data-target="#demo">
-        <fmt:message key="web.btn.products" bundle="${ rb }"/>
+        <fmt:message key="web.btn.products" bundle="${ lang }"/>
     </button>
     <div id="demo" class="collapse">
         <div class="product-list">
@@ -106,7 +106,7 @@
                             <c:out value="${product.key.productGroup.name}"/>
                         </div>
                         <div class="product-type text-muted">
-                                ${product.key.weight} <fmt:message key="web.gram" bundle="${ rb }"/>.
+                                ${product.key.weight} <fmt:message key="web.gram" bundle="${ lang }"/>.
                         </div>
                     </div>
                     <div class="flex-part">

@@ -17,13 +17,13 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 
 <c:import url="../fragments/navPanel.jsp"/>
 <header>
     <h1>
-        <fmt:message key="web.links.product-groups" bundle="${ rb }"/>
+        <fmt:message key="web.links.product-groups" bundle="${ lang }"/>
     </h1>
 </header>
 
@@ -32,7 +32,7 @@
     <div class="create__new mb-5">
         <a href="<c:url value="/page/admin/create-product-group"/>">
             <button class="btn white__bg__orange">
-                <fmt:message key="web.btn.create-new-product-group" bundle="${ rb }"/>
+                <fmt:message key="web.btn.create-new-product-group" bundle="${ lang }"/>
             </button>
         </a>
     </div>
@@ -41,31 +41,31 @@
         <thead>
         <tr>
             <th>
-                <fmt:message key="web.tab.photo" bundle="${ rb }"/>
+                <fmt:message key="web.tab.photo" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.identifier" bundle="${ rb }"/>
+                <fmt:message key="web.tab.identifier" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.name" bundle="${ rb }"/>
+                <fmt:message key="web.tab.name" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.description" bundle="${ rb }"/>
+                <fmt:message key="web.tab.description" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.type" bundle="${ rb }"/>
+                <fmt:message key="web.tab.type" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.disabled" bundle="${ rb }"/>
+                <fmt:message key="web.tab.disabled" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.disable" bundle="${ rb }"/>
+                <fmt:message key="web.tab.disable" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.enable" bundle="${ rb }"/>
+                <fmt:message key="web.tab.enable" bundle="${ lang }"/>
             </th>
             <th>
-                <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                <fmt:message key="web.tab.edit" bundle="${ lang }"/>
             </th>
         </tr>
         </thead>
@@ -81,7 +81,7 @@
                 <td>
                     <form action="<c:url value="/page/admin/disable-product-group"/>" method="post">
                         <button class="btn orange__bg" type="submit">
-                            <fmt:message key="web.tab.disable" bundle="${ rb }"/>
+                            <fmt:message key="web.tab.disable" bundle="${ lang }"/>
                         </button>
                         <label>
                             <input type="number" hidden name="id" value="${p.id}">
@@ -92,7 +92,7 @@
                 <td>
                     <form action="<c:url value="/page/admin/enable-product-group"/>" method="post">
                         <button class="btn orange__bg" type="submit">
-                            <fmt:message key="web.tab.enable" bundle="${ rb }"/>
+                            <fmt:message key="web.tab.enable" bundle="${ lang }"/>
                         </button>
                         <label>
                             <input type="number" hidden name="id" value="${p.id}">
@@ -102,7 +102,7 @@
                 <td>
                     <a href="<c:url value="/page/admin/edit-product-group/${p.id}"/>">
                         <button class="btn orange__bg">
-                            <fmt:message key="web.tab.edit" bundle="${ rb }"/>
+                            <fmt:message key="web.tab.edit" bundle="${ lang }"/>
                         </button>
                     </a>
                 </td>

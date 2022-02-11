@@ -12,29 +12,29 @@
 <body>
 <footer class="bg-dark">
 
-    <fmt:setBundle basename="property.text" var="rb"/>
+    <fmt:setBundle basename="property.text" var="lang"/>
 
     <div class="container">
         <a href="?">
-            <fmt:message key="web.links.about-us" bundle="${ rb }"/>
+            <fmt:message key="web.links.about-us" bundle="${ lang }"/>
         </a>
         <a href="?">
-            <fmt:message key="web.links.all-love" bundle="${ rb }"/>
+            <fmt:message key="web.links.all-love" bundle="${ lang }"/>
         </a>
         <a href="?">
-            <fmt:message key="web.links.our-blog" bundle="${ rb }"/>
+            <fmt:message key="web.links.our-blog" bundle="${ lang }"/>
         </a>
         <a href="?">
-            <fmt:message key="web.links.sponsors" bundle="${ rb }"/>
+            <fmt:message key="web.links.sponsors" bundle="${ lang }"/>
         </a>
 
         <form method="post" class="footer__element" action="<c:url value="/page/change-language"/>">
             <input type="hidden" value="ru" name="lang">
-            <input type="submit" value="<fmt:message key="web.lang.rus" bundle="${ rb }"/>">
+            <input type="submit" value="<fmt:message key="web.lang.rus" bundle="${ lang }"/>">
         </form>
         <form method="post" class="footer__element" action="<c:url value="/page/change-language"/>">
             <input type="hidden" value="en" name="lang">
-            <input type="submit" value="<fmt:message key="web.lang.en" bundle="${ rb }"/>">
+            <input type="submit" value="<fmt:message key="web.lang.en" bundle="${ lang }"/>">
         </form>
 
     </div>

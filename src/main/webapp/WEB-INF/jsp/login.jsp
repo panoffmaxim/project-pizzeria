@@ -15,14 +15,14 @@
 </head>
 <body>
 
-<fmt:setBundle basename="property.text" var="rb"/>
+<fmt:setBundle basename="property.text" var="lang"/>
 
 
 <c:import url="fragments/navPanel.jsp"/>
 
 <header class="container">
     <h1>
-        <fmt:message key="web.links.login" bundle="${ rb }"/>
+        <fmt:message key="web.links.login" bundle="${ lang }"/>
     </h1>
 </header>
 
@@ -30,23 +30,23 @@
     <c:if test="${not empty redirect_authentication_error}">
         <div class="alert alert-info alert-dismissible">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <fmt:message key="web.errors.authentication" bundle="${ rb }"/>
+            <fmt:message key="web.errors.authentication" bundle="${ lang }"/>
         </div>
     </c:if>
     <form action="<c:url value="/page/login"/>" method="post">
         <div class="username__group">
             <label for="username">
-                <fmt:message key="web.inputs.username" bundle="${ rb }"/>:
+                <fmt:message key="web.inputs.username" bundle="${ lang }"/>:
             </label>
             <input type="text" id="username"
-                   placeholder="<fmt:message key="web.inputs.username" bundle="${ rb }"/>"
+                   placeholder="<fmt:message key="web.inputs.username" bundle="${ lang }"/>"
                    class="form-control" name="username">
         </div>
 
         <div class="password__group">
-            <label for="password"><fmt:message key="web.inputs.password" bundle="${ rb }"/>:</label>
+            <label for="password"><fmt:message key="web.inputs.password" bundle="${ lang }"/>:</label>
             <input name="password" type="password" id="password" class="form-control"
-                   placeholder="<fmt:message key="web.inputs.password" bundle="${ rb }"/>">
+                   placeholder="<fmt:message key="web.inputs.password" bundle="${ lang }"/>">
         </div>
 
 
@@ -58,7 +58,7 @@
 
         <div class="submit">
             <button class="btn white__bg__orange" type="submit">
-                <fmt:message key="web.inputs.submit" bundle="${ rb }"/>
+                <fmt:message key="web.inputs.submit" bundle="${ lang }"/>
             </button>
         </div>
     </form>
@@ -66,12 +66,12 @@
     <div class="links">
         <div class="registration">
             <a href="<c:url value="/page/registration"/>">
-                <fmt:message key="web.text.not-reg-yet" bundle="${ rb }"/>
+                <fmt:message key="web.text.not-reg-yet" bundle="${ lang }"/>
             </a>
         </div>
         <div class="forgot__password">
             <a href="<c:url value="/page/forgot-password"/>">
-                <fmt:message key="web.text.forgot-password" bundle="${ rb }"/>
+                <fmt:message key="web.text.forgot-password" bundle="${ lang }"/>
             </a>
         </div>
     </div>
