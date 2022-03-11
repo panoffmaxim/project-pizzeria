@@ -120,7 +120,7 @@ public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
                     return false;
                 }
             } catch (SQLException | NullPointerException e) {
-                LOGGER.info("e: ", e);
+                LOGGER.info("Exception while executing addProductsOnCreate ", e);
                 return false;
             }
         }
@@ -142,7 +142,7 @@ public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing plusProductFirst ", e);
             return false;
         }
     }
@@ -155,7 +155,7 @@ public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing plusExistingProduct ", e);
             return false;
         }
     }
@@ -168,7 +168,7 @@ public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing removeProduct ", e);
             return false;
         }
     }
@@ -181,7 +181,7 @@ public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing minusProduct ", e);
             return false;
         }
     }
@@ -198,7 +198,7 @@ public class OrderDaoImpl extends AbstractBaseDao<Integer, Order> {
             }
             return null;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findCurrentByUserId", e);
             return null;
         }
     }

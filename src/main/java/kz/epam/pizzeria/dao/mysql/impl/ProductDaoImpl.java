@@ -91,7 +91,7 @@ public class ProductDaoImpl extends AbstractBaseDao<Integer, Product> {
                 productGroups.add(entity);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findAllByProductGroupId ", e);
         }
         return productGroups;
     }
@@ -113,7 +113,7 @@ public class ProductDaoImpl extends AbstractBaseDao<Integer, Product> {
                 result.put(entity, count);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findAllByOrderId ", e);
         }
         return result;
     }
@@ -132,7 +132,7 @@ public class ProductDaoImpl extends AbstractBaseDao<Integer, Product> {
                 entities.add(entity);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findAllByProductGroupNotDisabled ", e);
         }
         return entities;
     }

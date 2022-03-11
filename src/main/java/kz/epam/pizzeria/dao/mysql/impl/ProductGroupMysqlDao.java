@@ -88,7 +88,7 @@ public class ProductGroupMysqlDao extends AbstractBaseDao<Integer, ProductGroup>
                 productGroups.add(entity);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findAllByProductTypeAndDisabled ", e);
         }
         return productGroups;
     }

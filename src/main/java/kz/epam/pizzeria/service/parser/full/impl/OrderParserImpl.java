@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.parser.full.impl;
 
+import kz.epam.pizzeria.service.parser.full.OrderParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +18,7 @@ import kz.epam.pizzeria.service.validator.BasketValidator;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public class OrderParserImpl implements kz.epam.pizzeria.service.parser.full.OrderParser {
+public class OrderParserImpl implements OrderParser {
     private static final Logger LOGGER = LogManager.getLogger(OrderParserImpl.class);
     private final StreetParserOrder streetParserOrder = StreetParserOrder.getInstance();
     private final CommentsParser commentsParser = CommentsParser.getInstance();

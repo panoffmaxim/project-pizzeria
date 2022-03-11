@@ -31,7 +31,7 @@ public class MainServlet extends HttpServlet {
         try {
             executeMethod(commandGetFactory, request, response);
         } catch (PermissionDeniedException e) {
-            LOGGER.debug("Permission denied e:", e);
+            LOGGER.debug("Permission denied ", e);
             ResponseObject execute = permDen.execute(request, response);
             execute.execute(request, response);
         }
@@ -54,7 +54,7 @@ public class MainServlet extends HttpServlet {
             ResponseObject resp = command.execute(request, response);
             resp.execute(request, response);
         } catch (PageNotFoundException e) {
-            LOGGER.debug("e: ", e);
+            LOGGER.debug("Not found ", e);
         }
     }
 }

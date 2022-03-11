@@ -61,7 +61,7 @@ public class ConnectionPool {
             return createOrAccess();
 
         } catch (InterruptedException | SQLException e) {
-            LOGGER.error("e: ", e);
+            LOGGER.error("Error while take connection ", e);
             return null;
         } finally {
             locker.unlock();

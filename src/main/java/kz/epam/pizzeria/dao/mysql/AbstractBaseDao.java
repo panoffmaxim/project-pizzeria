@@ -48,7 +48,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
                 entities.add(entity);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findAll ", e);
         }
         return entities;
     }
@@ -66,7 +66,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
                 entities.add(entity);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findAllByPart ", e);
         }
         return entities;
     }
@@ -84,7 +84,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
                 entity = findEntity(resultSet);
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing findEntityById ", e);
         }
         return entity;
     }
@@ -98,7 +98,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
             idParam(statement, id);
             return statement.executeUpdate() == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.error("e: ", e);
+            LOGGER.error("Exception while executing deleteById ", e);
         }
         return false;
     }
@@ -110,7 +110,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
             idParam(statement, entity.getId());
             return statement.executeUpdate() == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing delete ", e);
         }
         return false;
     }
@@ -131,7 +131,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
                 }
             }
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing create ", e);
         }
         return null;
     }
@@ -147,7 +147,7 @@ public abstract class AbstractBaseDao<ID, T extends Entity<ID>> implements Abstr
             updateParams(entity, statement);
             return statement.executeUpdate() == 1;
         } catch (SQLException | NullPointerException e) {
-            LOGGER.info("e: ", e);
+            LOGGER.info("Exception while executing update ", e);
         }
         return false;
     }
