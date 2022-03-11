@@ -1,6 +1,6 @@
 package kz.epam.pizzeria.service.db.impl;
 
-import kz.epam.pizzeria.config.Configuration;
+import kz.epam.pizzeria.constant.OtherConstants;
 import kz.epam.pizzeria.entity.db.impl.DeliveryInf;
 import kz.epam.pizzeria.entity.db.impl.Order;
 import kz.epam.pizzeria.entity.db.impl.Product;
@@ -37,7 +37,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void testFindAllByPart() throws ServiceException {
-        assertEquals(orderServiceImpl.findAllByPart(1).size(), Configuration.MAX_PAGINATION_ELEMENTS);
+        assertEquals(orderServiceImpl.findAllByPart(1).size(), OtherConstants.MAX_PAGINATION_ELEMENTS);
     }
 
     @Test

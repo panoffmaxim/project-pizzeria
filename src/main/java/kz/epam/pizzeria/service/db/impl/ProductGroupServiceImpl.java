@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.db.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,8 +19,6 @@ import kz.epam.pizzeria.service.exception.ServiceException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 
 public class ProductGroupServiceImpl implements ProductGroupService {
     private static final Logger LOGGER = LogManager.getLogger(ProductGroupServiceImpl.class);
@@ -43,7 +42,8 @@ public class ProductGroupServiceImpl implements ProductGroupService {
     @Override
     public List<ProductGroup> findAllByPart(int part) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            List<ProductGroup> all = productGroupMysqlDao.findAllByPart(transaction, (part - 1) * MAX_PAGINATION_ELEMENTS, MAX_PAGINATION_ELEMENTS);
+            List<ProductGroup> all = productGroupMysqlDao.findAllByPart(transaction, (part - 1) * OtherConstants.MAX_PAGINATION_ELEMENTS,
+                    OtherConstants.MAX_PAGINATION_ELEMENTS);
             for (ProductGroup productGroup : all) {
                 buildProductGroup(productGroup, transaction);
             }

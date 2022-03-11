@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.db.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import kz.epam.pizzeria.dao.DAOFactory;
 import kz.epam.pizzeria.dao.exception.DaoException;
 import kz.epam.pizzeria.dao.mysql.Transaction;
@@ -10,8 +11,6 @@ import kz.epam.pizzeria.service.exception.IllegalIdException;
 import kz.epam.pizzeria.service.exception.ServiceException;
 
 import java.util.List;
-
-import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 
 public class UserServiceImpl implements UserService {
     private final DAOFactory dAOFactory = DAOFactory.getInstance();
@@ -29,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllByPart(int part) throws ServiceException {
         try (Transaction transaction = dAOFactory.createTransaction()) {
-            return userDaoImpl.findAllByPart(transaction, (part - 1) * MAX_PAGINATION_ELEMENTS, MAX_PAGINATION_ELEMENTS);
+            return userDaoImpl.findAllByPart(transaction, (part - 1) * OtherConstants.MAX_PAGINATION_ELEMENTS, OtherConstants.MAX_PAGINATION_ELEMENTS);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

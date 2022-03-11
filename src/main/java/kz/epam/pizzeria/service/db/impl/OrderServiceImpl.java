@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.db.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,8 +20,6 @@ import kz.epam.pizzeria.service.exception.ServiceException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 
 public class OrderServiceImpl implements OrderService {
     private static final Logger LOGGER = LogManager.getLogger(OrderServiceImpl.class);
@@ -45,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findAllByPart(int part) throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
-            return orderDaoImpl.findAllByPart(transaction, (part - 1) * MAX_PAGINATION_ELEMENTS, MAX_PAGINATION_ELEMENTS).stream()
+            return orderDaoImpl.findAllByPart(transaction, (part - 1) * OtherConstants.MAX_PAGINATION_ELEMENTS, OtherConstants.MAX_PAGINATION_ELEMENTS).stream()
                     .peek(o -> buildOrder(o, transaction))
                     .collect(Collectors.toList());
         } catch (DaoException e) {

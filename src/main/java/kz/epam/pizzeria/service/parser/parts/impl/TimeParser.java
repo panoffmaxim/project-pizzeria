@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.parser.parts.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import kz.epam.pizzeria.service.parser.parts.ParamsParser;
 import kz.epam.pizzeria.service.validator.parts.TimeValidator;
 
@@ -14,15 +15,13 @@ public class TimeParser extends ParamsParser<LocalDateTime> {
         return INSTANCE;
     }
 
-    private static final String FORMAT = "HH:mm";
-
     private TimeParser() {
         super(TimeValidator.getInstance());
     }
 
     @Override
     protected LocalDateTime modify(String input) throws Exception {
-        LocalTime localTime = LocalTime.parse(input, DateTimeFormatter.ofPattern(FORMAT));
+        LocalTime localTime = LocalTime.parse(input, DateTimeFormatter.ofPattern(OtherConstants.FORMAT));
         LocalDateTime time = LocalDateTime.now()
                 .withHour(localTime.getHour())
                 .withMinute(localTime.getMinute())

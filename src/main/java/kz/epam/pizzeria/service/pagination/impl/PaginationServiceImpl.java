@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.pagination.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import kz.epam.pizzeria.service.pagination.PaginationService;
 import kz.epam.pizzeria.service.pagination.PaginationStatus;
 
@@ -9,7 +10,6 @@ import java.util.TreeMap;
 import static kz.epam.pizzeria.service.pagination.PaginationStatus.*;
 
 public class PaginationServiceImpl implements PaginationService {
-    public static final int BAR_LIMIT = 6;
 
     @Override
     public Map<Integer, PaginationStatus> calculate(int allCount, int current, int pageLimit) {
@@ -18,13 +18,13 @@ public class PaginationServiceImpl implements PaginationService {
             return map;
         }
         int barCount = (allCount + pageLimit - 1) / pageLimit;
-        if (barCount > BAR_LIMIT) {
+        if (barCount > OtherConstants.BAR_LIMIT) {
             if (current < 1 || current > barCount) {
                 outOfRange(map, barCount);
             } else {
-                if (current < BAR_LIMIT - 3) {
+                if (current < OtherConstants.BAR_LIMIT - 3) {
                     moreToBegin(map, barCount);
-                } else if (barCount - current < BAR_LIMIT - 3) {
+                } else if (barCount - current < OtherConstants.BAR_LIMIT - 3) {
                     moreToEnd(map, barCount);
                 } else {
                     inMid(current, map);
@@ -47,14 +47,14 @@ public class PaginationServiceImpl implements PaginationService {
     private void moreToEnd(Map<Integer, PaginationStatus> map, int barCount) {
         map.put(1, NORMAL);
         map.put(2, THREE_POINTS);
-        for (int i = barCount; i > barCount - (BAR_LIMIT - 2); i--) {
+        for (int i = barCount; i > barCount - (OtherConstants.BAR_LIMIT - 2); i--) {
             map.put(i, NORMAL);
         }
     }
 
     private void moreToBegin(Map<Integer, PaginationStatus> map, int barCount) {
         int i;
-        for (i = 1; i < BAR_LIMIT - 3; i++) {
+        for (i = 1; i < OtherConstants.BAR_LIMIT - 3; i++) {
             map.put(i, NORMAL);
         }
         map.put(i, NORMAL);
@@ -65,9 +65,9 @@ public class PaginationServiceImpl implements PaginationService {
     private void inMid(int current, Map<Integer, PaginationStatus> map) {
         map.put(1, NORMAL);
         map.put(2, THREE_POINTS);
-        map.put(BAR_LIMIT, NORMAL);
-        map.put(BAR_LIMIT - 1, THREE_POINTS);
-        int remainPoints = BAR_LIMIT - 4;
+        map.put(OtherConstants.BAR_LIMIT, NORMAL);
+        map.put(OtherConstants.BAR_LIMIT - 1, THREE_POINTS);
+        int remainPoints = OtherConstants.BAR_LIMIT - 4;
         int counter = 1;
         while (remainPoints > 0) {
             map.put(current - counter, NORMAL);

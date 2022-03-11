@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.validator.parts;
 
+import kz.epam.pizzeria.constant.ValidatorConstants;
 import kz.epam.pizzeria.service.validator.Validator;
 
 public class IdValidator implements Validator<Integer> {
@@ -11,10 +12,9 @@ public class IdValidator implements Validator<Integer> {
 
     private IdValidator() {
     }
-    private static final int MIN_EXCLUDE_VALUE = 0;
 
     @Override
     public boolean isValid(Integer input) {
-        return input != null && input > MIN_EXCLUDE_VALUE;
+        return input != null && input > ValidatorConstants.ID_MIN_EXCLUDE_VALUE;
     }
 }

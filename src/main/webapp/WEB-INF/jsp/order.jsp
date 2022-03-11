@@ -273,7 +273,7 @@
                             </c:when>
                             <c:when test="${role eq 'CLIENT'}">
 
-                                <jsp:useBean id="info" scope="request" type="kz.epam.pizzeria.controller.dto.UserDTO"/>
+                                <jsp:useBean id="info" scope="request" type="kz.epam.pizzeria.dto.UserDTO"/>
 
                                 <form action="<c:url value="/page/client/make-order"/>" method="post">
                                     <div class="body__form">

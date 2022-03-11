@@ -1,11 +1,10 @@
 package kz.epam.pizzeria.service.validator.parts;
 
+import kz.epam.pizzeria.constant.ValidatorConstants;
 import kz.epam.pizzeria.service.validator.Validator;
 
 public class FloorValidator implements Validator<Integer> {
     private static FloorValidator INSTANCE = new FloorValidator();
-    private static final int MIN = -100;
-    private static final int MAX = 100;
 
     public static FloorValidator getInstance() {
         return INSTANCE;
@@ -16,6 +15,6 @@ public class FloorValidator implements Validator<Integer> {
 
     @Override
     public boolean isValid(Integer input) {
-        return input == null || (input < MAX && input > MIN);
+        return input == null || (input < ValidatorConstants.FLOOR_MAX && input > ValidatorConstants.FLOOR_MIN);
     }
 }

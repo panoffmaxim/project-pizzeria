@@ -1,10 +1,10 @@
 package kz.epam.pizzeria.service.validator.parts;
 
+import kz.epam.pizzeria.constant.ValidatorConstants;
 import kz.epam.pizzeria.service.validator.Validator;
 
 public class ProductGroupInProductValidator implements Validator<Integer> {
     private static ProductGroupInProductValidator INSTANCE = new ProductGroupInProductValidator();
-    private static final int MIN_VALUE = 0;
 
     public static ProductGroupInProductValidator getInstance() {
         return INSTANCE;
@@ -15,6 +15,6 @@ public class ProductGroupInProductValidator implements Validator<Integer> {
 
     @Override
     public boolean isValid(Integer input) {
-        return input == null || input > MIN_VALUE;
+        return input == null || input > ValidatorConstants.PRODUCT_GROUP_MIN_VALUE;
     }
 }

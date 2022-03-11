@@ -1,10 +1,10 @@
 package kz.epam.pizzeria.service.validator;
 
+import kz.epam.pizzeria.constant.OtherConstants;
+import kz.epam.pizzeria.constant.ValidatorConstants;
 import kz.epam.pizzeria.entity.db.impl.Product;
 
 import java.util.Map;
-
-import static kz.epam.pizzeria.service.parser.helper.impl.ValidateAndPutterImpl.POSTFIX;
 
 public class BasketValidator {
     private static BasketValidator INSTANCE = new BasketValidator();
@@ -16,8 +16,6 @@ public class BasketValidator {
     private BasketValidator() {
     }
 
-    private static final int MIN_VALUE = 1;
-
     public boolean isValid(Map<Product, Integer> basket, Map<String, String> redirect, String label) {
         if (basket == null || basket.isEmpty()) {
             wrongCallBack(redirect, label);
@@ -27,7 +25,7 @@ public class BasketValidator {
                 .anyMatch(e -> {
                     Product key = e.getKey();
                     Integer value = e.getValue();
-                    return key == null || key.getId() == null || value == null || value < MIN_VALUE;
+                    return key == null || key.getId() == null || value == null || value < ValidatorConstants.BASKET_MIN_VALUE;
                 });
         if (match) {
             wrongCallBack(redirect, label);
@@ -37,6 +35,6 @@ public class BasketValidator {
     }
 
     private void wrongCallBack(Map<String, String> redirect, String label) {
-        redirect.put(label + POSTFIX, "true");
+        redirect.put(label + OtherConstants.POSTFIX, "true");
     }
 }

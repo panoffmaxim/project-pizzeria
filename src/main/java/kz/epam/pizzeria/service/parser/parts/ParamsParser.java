@@ -24,7 +24,7 @@ public abstract class ParamsParser<T> {
             }
             return OptionalNullable.empty();
         } catch (Exception e) {
-            LOGGER.debug("parse: e: ", e);
+            LOGGER.debug("validator exception ", e);
             return OptionalNullable.empty();
         }
     }

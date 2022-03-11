@@ -1,11 +1,10 @@
 package kz.epam.pizzeria.service.validator.parts;
 
+import kz.epam.pizzeria.constant.ValidatorConstants;
 import kz.epam.pizzeria.service.validator.Validator;
 
 public class PriceValidator implements Validator<Integer> {
     private static PriceValidator INSTANCE = new PriceValidator();
-    private static final int MAX_VALUE = 1_000_000_000;
-    private static final int MIN_VALUE = 0;
 
     public static PriceValidator getInstance() {
         return INSTANCE;
@@ -16,6 +15,6 @@ public class PriceValidator implements Validator<Integer> {
 
     @Override
     public boolean isValid(Integer input) {
-        return input >= MIN_VALUE && input <= MAX_VALUE;
+        return input >= ValidatorConstants.PRICE_MIN_VALUE && input <= ValidatorConstants.PRICE_MAX_VALUE;
     }
 }

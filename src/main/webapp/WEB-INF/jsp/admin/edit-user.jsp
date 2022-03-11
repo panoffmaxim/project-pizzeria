@@ -66,12 +66,14 @@
                     </label>
                     <c:if test="${not empty redirect_role_error}">
                     <span class="error__message"
-                          title="<fmt:message key="web.inputs.err-value" bundle="${ lang }"/>: <c:out value="${redirect_role}"/>">
+                          title="<fmt:message key="web.inputs.err-value" bundle="${ lang }"/>: <%--@elvariable id="redirect_role" type="kz"--%>
+                          <c:out value="${redirect_role}"/>">
                         <fmt:message key="web.errors.field" bundle="${ lang }"/>
                     </span>
                     </c:if>
                     <select class="form-control" id="role" name="role">
                         <option>${user.role}</option>
+                        <%--@elvariable id="roles" type="java.util.List"--%>
                         <c:forEach var="role" items="${roles}">
                             <option>${role}</option>
                         </c:forEach>

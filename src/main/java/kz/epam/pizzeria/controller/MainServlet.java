@@ -3,14 +3,14 @@ package kz.epam.pizzeria.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import kz.epam.pizzeria.controller.command.Command;
-import kz.epam.pizzeria.controller.command.PermissionDeniedException;
-import kz.epam.pizzeria.controller.command.getimpl.PermissionDenied;
-import kz.epam.pizzeria.controller.factory.CommandFactory;
-import kz.epam.pizzeria.controller.factory.impl.CommandGetFactory;
-import kz.epam.pizzeria.controller.factory.impl.CommandPostFactory;
-import kz.epam.pizzeria.controller.factory.exception.PageNotFoundException;
-import kz.epam.pizzeria.controller.utils.ResponseObject;
+import kz.epam.pizzeria.command.Command;
+import kz.epam.pizzeria.service.exception.PermissionDeniedException;
+import kz.epam.pizzeria.command.getimpl.PermissionDenied;
+import kz.epam.pizzeria.factory.CommandFactory;
+import kz.epam.pizzeria.factory.impl.CommandGetFactory;
+import kz.epam.pizzeria.factory.impl.CommandPostFactory;
+import kz.epam.pizzeria.factory.exception.PageNotFoundException;
+import kz.epam.pizzeria.utils.ResponseObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

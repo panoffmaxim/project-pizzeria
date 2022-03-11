@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static kz.epam.pizzeria.service.parser.helper.impl.ValidateAndPutterImpl.POSTFIX;
+import static kz.epam.pizzeria.constant.OtherConstants.POSTFIX;
 import static org.testng.Assert.*;
 
 public class ProductParserImplTest {

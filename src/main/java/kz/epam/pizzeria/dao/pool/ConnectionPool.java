@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.dao.pool;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,14 +26,13 @@ public class ConnectionPool {
     private ConnectionPool() {
     }
 
-    public static final int MAX_COUNT = 30;
     private static Properties properties = new Properties();
     private List<Connection> passive = new ArrayList<>();
     private List<Connection> inUse = new ArrayList<>();
     private static final String RESOURCE = "/property/database.properties";
     private ReentrantLock locker = new ReentrantLock(false);
     private Condition condition = locker.newCondition();
-    private Semaphore semaphore = new Semaphore(MAX_COUNT, false);
+    private Semaphore semaphore = new Semaphore(OtherConstants.CONNECTION_POOL_MAX_COUNT, false);
 
     static {
         init();
@@ -69,7 +69,7 @@ public class ConnectionPool {
     }
 
     boolean noAccessibleCon() {
-        return passive.isEmpty() && (passive.size() + inUse.size() >= MAX_COUNT);
+        return passive.isEmpty() && (passive.size() + inUse.size() >= OtherConstants.CONNECTION_POOL_MAX_COUNT);
     }
 
     public void release(Connection cn) {

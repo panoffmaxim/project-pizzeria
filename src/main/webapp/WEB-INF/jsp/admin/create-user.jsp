@@ -198,7 +198,7 @@
                 <input type="text" id="phone" name="phone"
                        placeholder="<fmt:message key="web.inputs.phone" bundle="${ lang }"/>"
                        class="form-control" value="<c:out value="${redirect_phone}"/>"
-                       pattern="\d{9}" required>
+                       pattern="\d{11}" required>
             </div>
 
             <div class="email">

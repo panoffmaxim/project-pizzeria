@@ -1,10 +1,9 @@
 package kz.epam.pizzeria.service.validator.parts;
 
+import kz.epam.pizzeria.constant.ValidatorConstants;
 import kz.epam.pizzeria.service.validator.Validator;
 
 public class StreetValidatorUser implements Validator<String> {
-    public static final int MAX_LENGTH = 50;
-
     private static StreetValidatorUser INSTANCE = new StreetValidatorUser();
 
     public static StreetValidatorUser getInstance() {
@@ -16,6 +15,6 @@ public class StreetValidatorUser implements Validator<String> {
 
     @Override
     public boolean isValid(String input) {
-        return input == null || (!input.isEmpty() && input.length() < MAX_LENGTH);
+        return input == null || (!input.isEmpty() && input.length() < ValidatorConstants.STREET_NAME_MAX_LENGTH);
     }
 }

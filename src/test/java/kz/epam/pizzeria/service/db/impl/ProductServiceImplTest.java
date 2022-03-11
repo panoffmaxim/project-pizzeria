@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
+import static kz.epam.pizzeria.constant.OtherConstants.MAX_PAGINATION_ELEMENTS;
 import static org.testng.Assert.*;
 
 public class ProductServiceImplTest {

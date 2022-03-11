@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.db.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import kz.epam.pizzeria.dao.DAOFactory;
 import kz.epam.pizzeria.dao.exception.DaoException;
 import kz.epam.pizzeria.dao.mysql.Transaction;
@@ -12,8 +13,6 @@ import kz.epam.pizzeria.service.exception.ServiceException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static kz.epam.pizzeria.config.Configuration.MAX_PAGINATION_ELEMENTS;
 
 public class ProductServiceImpl implements ProductService {
     private final DAOFactory dAOFactory = DAOFactory.getInstance();
@@ -35,8 +34,8 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllByPart(int part) throws ServiceException {
         try (final Transaction transaction = dAOFactory.createTransaction()) {
             List<Product> all = productDaoImpl.findAllByPart(transaction,
-                    (part - 1) * MAX_PAGINATION_ELEMENTS,
-                    MAX_PAGINATION_ELEMENTS);
+                    (part - 1) * OtherConstants.MAX_PAGINATION_ELEMENTS,
+                    OtherConstants.MAX_PAGINATION_ELEMENTS);
             all.forEach(p -> buildProduct(p, transaction));
             return all;
         } catch (DaoException e) {

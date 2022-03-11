@@ -1,5 +1,6 @@
 package kz.epam.pizzeria.service.parser.full.impl;
 
+import kz.epam.pizzeria.constant.OtherConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +18,6 @@ import java.util.Map;
 
 public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.UserParser {
     private static final Logger LOGGER = LogManager.getLogger(UserParserImpl.class);
-    private static final String BLOCKED = "blocked";
     private final ValidateAndPutter validateAndPutter = ValidateAndPutterImpl.getInstance();
     private final ApplicationEncrypt applicationEncrypt = ApplicationEncryptImpl.getInstance();
     private final EmailParser emailParser = EmailParser.getInstance();
@@ -110,7 +110,7 @@ public class UserParserImpl implements kz.epam.pizzeria.service.parser.full.User
                 validateAndPutter.validateAndPut(redirect, phone, "phone", phoneParam) &
                 validateAndPutter.validateAndPut(redirect, email, "email", emailParam) &
                 validateAndPutter.validateAndPut(redirect, street, "street", streetParam) &
-                validateAndPutter.validateAndPut(redirect, isBlockedOpt, BLOCKED, isBlocked);
+                validateAndPutter.validateAndPut(redirect, isBlockedOpt, OtherConstants.BLOCKED, isBlocked);
         if (result) {
             base.setUsername(username.get());
             base.setRole(role.get());
